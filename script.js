@@ -624,3 +624,4 @@ function toggleFavorite(button, songName) {
         button.innerText = "♡";
 
     }
+           }
