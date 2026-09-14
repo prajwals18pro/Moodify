@@ -500,7 +500,7 @@ const songs = {
         ["A Thousand Years", "Christina Perri"]
     ]
 }
-},
+};
 
 /* =========================
    FIND MUSIC
