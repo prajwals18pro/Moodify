@@ -314,6 +314,66 @@ body.mood-emotional {
     font-size: 16px;
         }
     </style>
+    <style>
+
+/* ===== PROFESSIONAL SONG CARDS ===== */
+
+.song-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
+
+.song-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.song-number {
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+.song-info {
+    flex: 1;
+}
+
+.song-info h3 {
+    margin: 0 0 5px;
+    font-size: 17px;
+}
+
+.song-info p {
+    margin: 0;
+    opacity: 0.75;
+    font-size: 14px;
+}
+
+.listen-btn,
+.favorite-btn {
+    border: none;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.listen-btn:hover,
+.favorite-btn:hover {
+    transform: scale(1.12);
+}
+
+.favorite-btn.liked {
+    transform: scale(1.15);
+}
+
+    </style>
 </head>
 
 <body>
