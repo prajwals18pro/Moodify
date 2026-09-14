@@ -526,6 +526,7 @@ function findMusic() {
 
 
     const recommendedSongs = songs[selectedLanguage][selectedMood];
+   alert("Language: " + selectedLanguage + "\nMood: " + selectedMood + "\nSongs: " + recommendedSongs.length);
    alert("Songs found: " + recommendedSongs.length);
 
     if (!recommendedSongs) {
