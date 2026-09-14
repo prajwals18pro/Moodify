@@ -472,7 +472,7 @@ function findMusic() {
     }
 
 
-    const recommendedSongs = songs["Tamil"]["Happy"];
+    const recommendedSongs = songs[selectedLanguage][selectedMood];
    alert("Songs found: " + recommendedSongs.length);
 
     if (!recommendedSongs) {
