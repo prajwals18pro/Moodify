@@ -356,7 +356,8 @@ function findMusic() {
             </button>
 
             <button class="favorite-btn"
-                onclick="toggleFavorite(this, '${songName}')">
+            onclick="saveRecentlyPlayed('${song[0]}'); window.open(searchURL, '_blank')"
+            
 
                 ♡
 
