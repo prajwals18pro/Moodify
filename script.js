@@ -236,42 +236,98 @@ const songs = {
 },
     
     Tamil: {
+       
+       Happy: [
+        ["Vaathi Coming", "Master"],
+        ["Arabic Kuthu", "Beast"],
+        ["Chellamma", "Doctor"],
+        ["Dippam Dappam", "Kaathuvaakula Rendu Kaadhal"],
+        ["Private Party", "Don"],
+        ["Jimikki Ponnu", "Varisu"],
+        ["Ranjithame", "Varisu"],
+        ["Kutti Story", "Master"],
+        ["Selfie Pulla", "Kaththi"],
+        ["Aaluma Doluma", "Vedalam"]
+    ],
 
-        Happy: [
-            ["Vaathi Coming", "Master"],
-            ["Arabic Kuthu", "Beast"]
-        ],
+    Sad: [
+        ["Kanave Unai", "Kadhalum Kadandhu Pogum"],
+        ["Po Nee Po", "3"],
+        ["Ennodu Nee Irundhaal", "I"],
+        ["Maruvaarthai", "Enai Noki Paayum Thota"],
+        ["Yennai Maatrum Kadhale", "Naanum Rowdy Dhaan"],
+        ["Naan Pizhai", "Kaathuvaakula Rendu Kaadhal"],
+        ["Vennilave Vennilave", "Minsara Kanavu"],
+        ["Unakkenna Venum Sollu", "Yennai Arindhaal"],
+        ["Thalli Pogathey", "Achcham Enbadhu Madamaiyada"],
+        ["Oru Naalil", "Pudhupettai"]
+    ],
 
-        Sad: [
-            ["Kanave Unai", "Tamil Melody"],
-            ["New York Nagaram", "Sillunu Oru Kadhal"]
-        ],
+    Love: [
+        ["Munbe Vaa", "Sillunu Oru Kadhal"],
+        ["Vaseegara", "Minnale"],
+        ["Anbil Avan", "Vinnaithaandi Varuvaayaa"],
+        ["Hosanna", "Vinnaithaandi Varuvaayaa"],
+        ["Ennodu Nee Irundhaal", "I"],
+        ["Megham Karukatha", "Thiruchitrambalam"],
+        ["Nenjukkul Peidhidum", "Vaaranam Aayiram"],
+        ["Kadhal Anukkal", "Enthiran"],
+        ["Pachai Kiligal", "Indian"],
+        ["Kaathalae Kaathalae", "96"]
+    ],
 
-        Love: [
-            ["Munbe Vaa", "Sillunu Oru Kadhal"],
-            ["Vaseegara", "Minnale"]
-        ],
+    Attitude: [
+        ["Vaathi Coming", "Master"],
+        ["Naa Ready", "Leo"],
+        ["Hukum", "Jailer"],
+        ["Badass", "Leo"],
+        ["Aaluma Doluma", "Vedalam"],
+        ["Surviva", "Vivegam"],
+        ["Petta Paraak", "Petta"],
+        ["Danga Maari Oodhari", "Anegan"],
+        ["Sodakku", "Thaanaa Serndha Koottam"],
+        ["Jailer Theme", "Jailer"]
+    ],
 
-        Attitude: [
-            ["Neruppu Da", "Kabali"],
-            ["Vaathi Coming", "Master"]
-        ],
+    Chill: [
+        ["The Life of Ram", "96"],
+        ["Kaathalae Kaathalae", "96"],
+        ["Maruvaarthai", "Enai Noki Paayum Thota"],
+        ["Nenjukkul Peidhidum", "Vaaranam Aayiram"],
+        ["Thalli Pogathey", "Achcham Enbadhu Madamaiyada"],
+        ["Vaseegara", "Minnale"],
+        ["Munbe Vaa", "Sillunu Oru Kadhal"],
+        ["Anbe En Anbe", "Dhaam Dhoom"],
+        ["New York Nagaram", "Sillunu Oru Kadhal"],
+        ["Pookkal Pookkum", "Madrasapattinam"]
+    ],
 
-        Chill: [
-            ["Megham Karukatha", "Thiruchitrambalam"],
-            ["Thalli Pogathey", "Achcham Yenbadhu Madamaiyada"]
-        ],
+    Energetic: [
+        ["Vaathi Coming", "Master"],
+        ["Arabic Kuthu", "Beast"],
+        ["Ranjithame", "Varisu"],
+        ["Naa Ready", "Leo"],
+        ["Hukum", "Jailer"],
+        ["Dippam Dappam", "Kaathuvaakula Rendu Kaadhal"],
+        ["Aaluma Doluma", "Vedalam"],
+        ["Selfie Pulla", "Kaththi"],
+        ["Rowdy Baby", "Maari 2"],
+        ["Chill Bro", "Pattas"]
+    ],
 
-        Energetic: [
-            ["Arabic Kuthu", "Beast"],
-            ["Dippam Dappam", "Kaathuvaakula Rendu Kaadhal"]
-        ],
-
-        Emotional: [
-            ["Maruvaarthai", "Enai Noki Paayum Thota"],
-            ["Vaseegara", "Minnale"]
-        ]
-    },
+    Emotional: [
+        ["The Life of Ram", "96"],
+        ["Kaathalae Kaathalae", "96"],
+        ["Po Nee Po", "3"],
+        ["Maruvaarthai", "Enai Noki Paayum Thota"],
+        ["Vennilave Vennilave", "Minsara Kanavu"],
+        ["Naan Pizhai", "Kaathuvaakula Rendu Kaadhal"],
+        ["Ennodu Nee Irundhaal", "I"],
+        ["New York Nagaram", "Sillunu Oru Kadhal"],
+        ["Oru Naalil", "Pudhupettai"],
+        ["Munbe Vaa", "Sillunu Oru Kadhal"]
+    ]
+},  
 
 
     Telugu: {
