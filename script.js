@@ -319,7 +319,50 @@ function findMusic() {
     }
 
 
+
     let songHTML = "";
+
+    recommendedSongs.forEach((song, index) => {
+
+    const songName = song[0];
+    const artist = song[1];
+
+    const searchURL =
+        "https://www.youtube.com/results?search_query=" +
+        encodeURIComponent(songName + " " + artist);
+
+    songHTML += `
+        <div class="song-card">
+
+            <div class="song-number">
+                ${String(index + 1).padStart(2, "0")}
+            </div>
+
+            <div class="song-info">
+
+                <h3>🎵 ${songName}</h3>
+
+                <p>${artist}</p>
+
+            </div>
+
+            <button class="listen-btn"
+                onclick="window.open('${searchURL}', '_blank')">
+
+                ▶️
+
+            </button>
+
+            <button class="favorite-btn"
+                onclick="toggleFavorite(this, '${songName}')">
+
+                ♡
+
+            </button>
+
+        </div>
+    `;
+});
 
     recommendedSongs.forEach((song, index) => {
 
