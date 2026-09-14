@@ -372,6 +372,46 @@ body.mood-emotional {
 .favorite-btn.liked {
     transform: scale(1.15);
 }
+        /* ===== PREMIUM BUTTONS ===== */
+
+.language-btn,
+.mood-btn {
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.language-btn:hover,
+.mood-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+}
+
+.language-btn.selected,
+.mood-btn.selected {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.find-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.find-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.find-btn:active {
+    transform: scale(0.97);
+}
+
+.theme-btn {
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: rotate(20deg) scale(1.1);
+}
 
     </style>
 </head>
