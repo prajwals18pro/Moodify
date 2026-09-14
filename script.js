@@ -498,14 +498,10 @@ const songs = {
         ["Before You Go", "Lewis Capaldi"],
         ["Dandelions", "Ruth B."],
         ["A Thousand Years", "Christina Perri"]
-    ]
+   ]
 }
 };
-       
-       
-       
       
-
 /* =========================
    FIND MUSIC
 ========================= */
