@@ -142,45 +142,99 @@ const songs = {
         ["Paravashanadene", "Paramathma"]
     ]
 },
-    Hindi: {
+   Hindi: {
+    Happy: [
+        ["Ilahi", "Yeh Jawaani Hai Deewani"],
+        ["Gallan Goodiyaan", "Dil Dhadakne Do"],
+        ["Badtameez Dil", "Yeh Jawaani Hai Deewani"],
+        ["London Thumakda", "Queen"],
+        ["Kar Gayi Chull", "Kapoor & Sons"],
+        ["Aankh Marey", "Simmba"],
+        ["Abhi Toh Party Shuru Hui Hai", "Khoobsurat"],
+        ["What Jhumka?", "Rocky Aur Rani Kii Prem Kahaani"],
+        ["Ude Dil Befikre", "Befikre"],
+        ["Nachde Ne Saare", "Baar Baar Dekho"]
+    ],
 
-        Happy: [
-            ["Ilahi", "Yeh Jawaani Hai Deewani"],
-            ["Gallan Goodiyaan", "Dil Dhadakne Do"]
-        ],
+    Sad: [
+        ["Agar Tum Saath Ho", "Tamasha"],
+        ["Channa Mereya", "Ae Dil Hai Mushkil"],
+        ["Hamari Adhuri Kahani", "Hamari Adhuri Kahani"],
+        ["Phir Le Aya Dil", "Barfi!"],
+        ["Tujhe Bhula Diya", "Anjaana Anjaani"],
+        ["Tune Jo Na Kaha", "New York"],
+        ["Sach Keh Raha Hai Deewana", "Rehnaa Hai Terre Dil Mein"],
+        ["Mann Bharryaa 2.0", "Shershaah"],
+        ["Kaise Hua", "Kabir Singh"],
+        ["Bekhayali", "Kabir Singh"]
+    ],
 
-        Sad: [
-            ["Agar Tum Saath Ho", "Tamasha"],
-            ["Channa Mereya", "Ae Dil Hai Mushkil"]
-        ],
+    Love: [
+        ["Tum Se Hi", "Jab We Met"],
+        ["Tum Kya Mile", "Rocky Aur Rani Kii Prem Kahaani"],
+        ["Pehli Dafa", "Atif Aslam"],
+        ["Raabta", "Agent Vinod"],
+        ["Hawayein", "Jab Harry Met Sejal"],
+        ["Kesariya", "Brahmastra"],
+        ["Tera Ban Jaunga", "Kabir Singh"],
+        ["Apna Bana Le", "Bhediya"],
+        ["Aaj Se Teri", "Padman"],
+        ["Ve Kamleya", "Rocky Aur Rani Kii Prem Kahaani"]
+    ],
 
-        Love: [
-            ["Tum Se Hi", "Jab We Met"],
-            ["Tum Kya Mile", "Rocky Aur Rani Kii Prem Kahaani"]
-        ],
+    Attitude: [
+        ["Apna Time Aayega", "Gully Boy"],
+        ["Sultan Title Track", "Sultan"],
+        ["Kar Har Maidaan Fateh", "Sanju"],
+        ["Zinda", "Bhaag Milkha Bhaag"],
+        ["Brothers Anthem", "Brothers"],
+        ["Jee Karda", "Singh Is Kinng"],
+        ["Malhari", "Bajirao Mastani"],
+        ["Chak De India", "Chak De! India"],
+        ["Dangal Title Track", "Dangal"],
+        ["Sher Khul Gaye", "Fighter"]
+    ],
 
-        Attitude: [
-            ["Apna Time Aayega", "Gully Boy"],
-            ["Sultan Title Track", "Sultan"]
-        ],
+    Chill: [
+        ["Iktara", "Wake Up Sid"],
+        ["Khaabon Ke Parinday", "Zindagi Na Milegi Dobara"],
+        ["Kho Gaye Hum Kahan", "Baar Baar Dekho"],
+        ["Shaam", "Aisha"],
+        ["Aao Milo Chalo", "Jab We Met"],
+        ["Phir Se Ud Chala", "Rockstar"],
+        ["Safarnama", "Tamasha"],
+        ["Ilahi", "Yeh Jawaani Hai Deewani"],
+        ["Love You Zindagi", "Dear Zindagi"],
+        ["Kyun", "Barfi!"]
+    ],
 
-        Chill: [
-            ["Iktara", "Wake Up Sid"],
-            ["Khaabon Ke Parinday", "Zindagi Na Milegi Dobara"]
-        ],
+    Energetic: [
+        ["Jai Jai Shivshankar", "War"],
+        ["Malhari", "Bajirao Mastani"],
+        ["Ghungroo", "War"],
+        ["Jhoome Jo Pathaan", "Pathaan"],
+        ["Zinda Banda", "Jawan"],
+        ["Aaj Ki Party", "Bajrangi Bhaijaan"],
+        ["Muqabla", "Street Dancer 3D"],
+        ["Nashe Si Chadh Gayi", "Befikre"],
+        ["Kala Chashma", "Baar Baar Dekho"],
+        ["High Rated Gabru", "Nawabzaade"]
+    ],
 
-        Energetic: [
-            ["Jai Jai Shivshankar", "War"],
-            ["Malhari", "Bajirao Mastani"]
-        ],
-
-        Emotional: [
-            ["Phir Le Aya Dil", "Barfi!"],
-            ["Tujhe Kitna Chahne Lage", "Kabir Singh"]
-        ]
-    },
-
-
+    Emotional: [
+        ["Phir Le Aya Dil", "Barfi!"],
+        ["Tujhe Kitna Chahne Lage", "Kabir Singh"],
+        ["Channa Mereya", "Ae Dil Hai Mushkil"],
+        ["Agar Tum Saath Ho", "Tamasha"],
+        ["Kaise Hua", "Kabir Singh"],
+        ["Apna Bana Le", "Bhediya"],
+        ["Main Rang Sharbaton Ka", "Phata Poster Nikhla Hero"],
+        ["Jeena Jeena", "Badlapur"],
+        ["Tera Yaar Hoon Main", "Sonu Ke Titu Ki Sweety"],
+        ["Kabira", "Yeh Jawaani Hai Deewani"]
+    ]
+},
+    
     Tamil: {
 
         Happy: [
