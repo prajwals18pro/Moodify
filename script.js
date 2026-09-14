@@ -428,3 +428,19 @@ function toggleTheme() {
         button.innerText = "🌙";
     }
 }
+function toggleFavorite(button, songName) {
+
+    button.classList.toggle("liked");
+
+    if (button.classList.contains("liked")) {
+
+        button.innerText = "♥";
+
+        alert(songName + " ❤️ added to favorites!");
+
+    } else {
+
+        button.innerText = "♡";
+
+    }
+}
