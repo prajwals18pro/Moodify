@@ -6,7 +6,6 @@ let selectedMood = "";
 ========================= */
 
 function selectLanguage(button) {
-
     document.querySelectorAll(".language-btn").forEach(btn => {
         btn.classList.remove("selected");
     });
@@ -433,6 +432,23 @@ function toggleTheme() {
 }
 function toggleFavorite(button, songName) {
    function saveRecentlyPlayed(songName) {
+      function showRecent() {
+    const recent = JSON.parse(localStorage.getItem("moodifyRecent")) || [];
+    const recentList = document.getElementById("recentList");
+
+    if (recent.length === 0) {
+        recentList.innerHTML = '<p class="no-recent">No songs played yet.</p>';
+        return;
+    }
+
+    recentList.innerHTML = recent.map((song, index) => `
+        <div class="recent-card">
+            <span>${String(index + 1).padStart(2, "0")}</span>
+            <h3>🎵 ${song}</h3>
+        </div>
+    `).join("");
+      }
+      showRecent();
     let recent = JSON.parse(localStorage.getItem("moodifyRecent")) || [];
 
     recent = recent.filter(song => song !== songName);
