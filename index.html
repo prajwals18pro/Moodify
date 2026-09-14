@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Moodify 🎧</title>
 
     <style>
@@ -30,8 +31,8 @@
         }
 
         .logo {
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-size: 55px;
+            margin-bottom: 5px;
         }
 
         h1 {
@@ -78,7 +79,7 @@
         }
 
         button.selected {
-            background: #ffffff;
+            background: white;
             color: #141e30;
             transform: scale(1.05);
         }
@@ -101,16 +102,21 @@
         }
 
         .result h2 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        #selection {
+            line-height: 1.8;
         }
 
         @media (max-width: 600px) {
+
             h1 {
                 font-size: 34px;
             }
 
             .logo {
-                font-size: 40px;
+                font-size: 45px;
             }
 
             button {
@@ -133,11 +139,124 @@
         Your Mood. Your Language. Your Music.
     </p>
 
+
+    <!-- LANGUAGE -->
+
     <div class="section">
+
         <h2>🌐 Choose Your Language</h2>
 
         <div class="options">
-            <button onclick="selectLanguage(this)">🇮🇳 Kannada</button>
-            <button onclick="selectLanguage(this)">🇮🇳 Hindi</button>
-            <button onclick="selectLanguage(this)">🇮🇳 Tamil</button>
-            <button onclick
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇮🇳 Kannada
+            </button>
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇮🇳 Hindi
+            </button>
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇮🇳 Tamil
+            </button>
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇮🇳 Telugu
+            </button>
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇮🇳 Malayalam
+            </button>
+
+            <button class="language-btn"
+                    onclick="selectLanguage(this)">
+                🇬🇧 English
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MOOD -->
+
+    <div class="section">
+
+        <h2>💭 Choose Your Mood</h2>
+
+        <div class="options">
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                😎 Happy
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                😢 Sad
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                ❤️ Love
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                🔥 Attitude
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                😴 Chill
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                ⚡ Energetic
+            </button>
+
+            <button class="mood-btn"
+                    onclick="selectMood(this)">
+                🥺 Emotional
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FIND MUSIC -->
+
+    <button class="find-btn"
+            onclick="findMusic()">
+
+        🎵 FIND MY MUSIC
+
+    </button>
+
+
+    <!-- RESULT -->
+
+    <div class="result" id="result">
+
+        <h2>🎶 Your Music Is Ready!</h2>
+
+        <p id="selection"></p>
+
+    </div>
+
+</div>
+
+
+<!-- CONNECT JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
