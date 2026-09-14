@@ -499,6 +499,7 @@ const songs = {
         ["Dandelions", "Ruth B."],
         ["A Thousand Years", "Christina Perri"]
     ]
+}
 },
 
 /* =========================
