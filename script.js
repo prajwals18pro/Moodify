@@ -25,6 +25,8 @@ function selectLanguage(button) {
 ========================= */
 
 function selectMood(button) {
+   document.body.className = "";
+document.body.classList.add("mood-" + selectedMood.toLowerCase());
 
     document.querySelectorAll(".mood-btn").forEach(btn => {
         btn.classList.remove("selected");
