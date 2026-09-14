@@ -50,46 +50,98 @@ document.body.classList.add("mood-" + selectedMood.toLowerCase());
 ========================= */
 
 const songs = {
+   Kannada: {
+    Happy: [
+        ["Anisuthide", "Mungaru Male"],
+        ["Jotheyali Jothe Jotheyali", "Geetha"],
+        ["Belageddu", "Kirik Party"],
+        ["Bombe Helutaite", "Raambo 2"],
+        ["Naguva Nayana", "Pallavi Anu Pallavi"],
+        ["Paravashanadene", "Paramathma"],
+        ["Kaanada Kadalige", "Kannada Classic"],
+        ["Nooru Janmaku", "America America"],
+        ["Yaava Mohana Murali", "Kannada Classic"],
+        ["Minchagi Neenu Baralu", "Gaalipata"]
+    ],
 
-    Kannada: {
+    Sad: [
+        ["Minchagi Neenu Baralu", "Gaalipata"],
+        ["Ninnindale", "Milana"],
+        ["Jeeva Hoovagide", "Nee Nanna Gellalare"],
+        ["Ee Sanje Yakagide", "Geetha"],
+        ["Anisuthide", "Mungaru Male"],
+        ["Naguva Nayana", "Pallavi Anu Pallavi"],
+        ["Kariye Kogile", "Kannada Melody"],
+        ["Nee Nanna Gellalare", "Nee Nanna Gellalare"],
+        ["Hrudayake Hedarike", "Hrudayake Hedarike"],
+        ["Jeeva Hoovagide", "Kannada Classic"]
+    ],
 
-        Happy: [
-            ["Anisuthide", "Mungaru Male"],
-            ["Jotheyali Jothe Jotheyali", "Geetha"]
-        ],
+    Love: [
+        ["Ninnindale", "Milana"],
+        ["Mungaru Maleye", "Mungaru Male"],
+        ["Anisuthide", "Mungaru Male"],
+        ["Jotheyali Jothe Jotheyali", "Geetha"],
+        ["Paravashanadene", "Paramathma"],
+        ["Naguva Nayana", "Pallavi Anu Pallavi"],
+        ["Minchagi Neenu Baralu", "Gaalipata"],
+        ["Ee Sanje Yakagide", "Geetha"],
+        ["Kariye Kogile", "Kannada Melody"],
+        ["Nooru Janmaku", "America America"]
+    ],
 
-        Sad: [
-            ["Minchagi Neenu Baralu", "Gaalipata"],
-            ["Ninnindale", "Milana"]
-        ],
+    Attitude: [
+        ["Tagaru Banthu Tagaru", "Tagaru"],
+        ["Duniya", "Duniya"],
+        ["Pogaru", "Pogaru"],
+        ["Karabuu", "Pogaru"],
+        ["Open The Bottle", "Raambo 2"],
+        ["Yenammi Yenammi", "Ayogya"],
+        ["Ra Ra Rakkamma", "Vikrant Rona"],
+        ["Pushpavati", "Kranti"],
+        ["Dostha Kano", "Appu"],
+        ["Halli Haida Pyateg Banda", "Kannada"]
+    ],
 
-        Love: [
-            ["Ninnindale", "Milana"],
-            ["Mungaru Maleye", "Mungaru Male"]
-        ],
+    Chill: [
+        ["Belageddu", "Kirik Party"],
+        ["Kaanada Kadalige", "Kannada Classic"],
+        ["Anisuthide", "Mungaru Male"],
+        ["Naguva Nayana", "Pallavi Anu Pallavi"],
+        ["Jotheyali Jothe Jotheyali", "Geetha"],
+        ["Paravashanadene", "Paramathma"],
+        ["Mungaru Maleye", "Mungaru Male"],
+        ["Ee Sanje Yakagide", "Geetha"],
+        ["Ninnindale", "Milana"],
+        ["Nooru Janmaku", "America America"]
+    ],
 
-        Attitude: [
-            ["Tagaru Banthu Tagaru", "Tagaru"],
-            ["Duniya", "Duniya"]
-        ],
+    Energetic: [
+        ["Pogaru", "Pogaru"],
+        ["Karabuu", "Pogaru"],
+        ["Tagaru Banthu Tagaru", "Tagaru"],
+        ["Ra Ra Rakkamma", "Vikrant Rona"],
+        ["Yenammi Yenammi", "Ayogya"],
+        ["Pushpavati", "Kranti"],
+        ["Dostha Kano", "Appu"],
+        ["Open The Bottle", "Raambo 2"],
+        ["Bombe Helutaite", "Raambo 2"],
+        ["Belageddu", "Kirik Party"]
+    ],
 
-        Chill: [
-            ["Belageddu", "Kirik Party"],
-            ["Kaanada Kadalige", "Kannada Classic"]
-        ],
-
-        Energetic: [
-            ["Pogaru", "Pogaru"],
-            ["Karabuu", "Pogaru"]
-        ],
-
-        Emotional: [
-            ["Nee Sigovaregu", "Bhajarangi"],
-            ["Naguva Nayana", "Pallavi Anu Pallavi"]
-        ]
-    },
-
-
+    Emotional: [
+        ["Nee Sigovaregu", "Bhajarangi"],
+        ["Naguva Nayana", "Pallavi Anu Pallavi"],
+        ["Anisuthide", "Mungaru Male"],
+        ["Minchagi Neenu Baralu", "Gaalipata"],
+        ["Ninnindale", "Milana"],
+        ["Mungaru Maleye", "Mungaru Male"],
+        ["Jotheyali Jothe Jotheyali", "Geetha"],
+        ["Jeeva Hoovagide", "Nee Nanna Gellalare"],
+        ["Ee Sanje Yakagide", "Geetha"],
+        ["Paravashanadene", "Paramathma"]
+    ]
+},
     Hindi: {
 
         Happy: [
