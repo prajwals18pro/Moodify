@@ -431,6 +431,18 @@ function toggleTheme() {
     }
 }
 function toggleFavorite(button, songName) {
+   function saveRecentlyPlayed(songName) {
+    let recent = JSON.parse(localStorage.getItem("moodifyRecent")) || [];
+
+    recent = recent.filter(song => song !== songName);
+    recent.unshift(songName);
+
+    if (recent.length > 5) {
+        recent.pop();
+    }
+
+    localStorage.setItem("moodifyRecent", JSON.stringify(recent));
+   }
 
     button.classList.toggle("liked");
 
