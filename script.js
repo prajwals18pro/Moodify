@@ -409,44 +409,97 @@ const songs = {
 
 
     English: {
+    Happy: [
+        ["Happy", "Pharrell Williams"],
+        ["Can't Stop the Feeling!", "Justin Timberlake"],
+        ["Uptown Funk", "Mark Ronson ft. Bruno Mars"],
+        ["On Top of the World", "Imagine Dragons"],
+        ["Good Time", "Owl City & Carly Rae Jepsen"],
+        ["Best Day of My Life", "American Authors"],
+        ["Shake It Off", "Taylor Swift"],
+        ["Walking on Sunshine", "Katrina & The Waves"],
+        ["Dynamite", "BTS"],
+        ["I Gotta Feeling", "The Black Eyed Peas"]
+    ],
 
-        Happy: [
-            ["Happy", "Pharrell Williams"],
-            ["Good Life", "OneRepublic"]
-        ],
+    Sad: [
+        ["Someone You Loved", "Lewis Capaldi"],
+        ["Let Her Go", "Passenger"],
+        ["Lovely", "Billie Eilish & Khalid"],
+        ["The Night We Met", "Lord Huron"],
+        ["Another Love", "Tom Odell"],
+        ["When I Was Your Man", "Bruno Mars"],
+        ["Arcade", "Duncan Laurence"],
+        ["All I Want", "Kodaline"],
+        ["Dancing With Your Ghost", "Sasha Alex Sloan"],
+        ["Before You Go", "Lewis Capaldi"]
+    ],
 
-        Sad: [
-            ["Lovely", "Billie Eilish"],
-            ["Someone You Loved", "Lewis Capaldi"]
-        ],
+    Love: [
+        ["Perfect", "Ed Sheeran"],
+        ["Until I Found You", "Stephen Sanchez"],
+        ["All of Me", "John Legend"],
+        ["A Thousand Years", "Christina Perri"],
+        ["Just the Way You Are", "Bruno Mars"],
+        ["Love Story", "Taylor Swift"],
+        ["Thinking Out Loud", "Ed Sheeran"],
+        ["Adore You", "Harry Styles"],
+        ["Die With A Smile", "Lady Gaga & Bruno Mars"],
+        ["Photograph", "Ed Sheeran"]
+    ],
 
-        Love: [
-            ["Perfect", "Ed Sheeran"],
-            ["Until I Found You", "Stephen Sanchez"]
-        ],
+    Attitude: [
+        ["Believer", "Imagine Dragons"],
+        ["Thunder", "Imagine Dragons"],
+        ["Whatever It Takes", "Imagine Dragons"],
+        ["Legends Never Die", "Against The Current"],
+        ["Hall of Fame", "The Script"],
+        ["Stronger", "Kanye West"],
+        ["Lose Yourself", "Eminem"],
+        ["Centuries", "Fall Out Boy"],
+        ["Unstoppable", "Sia"],
+        ["The Greatest", "Sia"]
+    ],
 
-        Attitude: [
-            ["Believer", "Imagine Dragons"],
-            ["Unstoppable", "Sia"]
-        ],
+    Chill: [
+        ["Golden", "Harry Styles"],
+        ["Sunflower", "Post Malone & Swae Lee"],
+        ["Ocean Eyes", "Billie Eilish"],
+        ["Yellow", "Coldplay"],
+        ["Here With Me", "d4vd"],
+        ["Riptide", "Vance Joy"],
+        ["As It Was", "Harry Styles"],
+        ["Until I Found You", "Stephen Sanchez"],
+        ["Lovely", "Billie Eilish & Khalid"],
+        ["Heat Waves", "Glass Animals"]
+    ],
 
-        Chill: [
-            ["Sunflower", "Post Malone"],
-            ["Until I Found You", "Stephen Sanchez"]
-        ],
+    Energetic: [
+        ["Blinding Lights", "The Weeknd"],
+        ["Uptown Funk", "Mark Ronson ft. Bruno Mars"],
+        ["Don't Start Now", "Dua Lipa"],
+        ["Levitating", "Dua Lipa"],
+        ["Shape of You", "Ed Sheeran"],
+        ["Believer", "Imagine Dragons"],
+        ["Counting Stars", "OneRepublic"],
+        ["Cheap Thrills", "Sia"],
+        ["Shut Up and Dance", "WALK THE MOON"],
+        ["Dynamite", "BTS"]
+    ],
 
-        Energetic: [
-            ["Thunder", "Imagine Dragons"],
-            ["On Top of the World", "Imagine Dragons"]
-        ],
-
-        Emotional: [
-            ["Lovely", "Billie Eilish"],
-            ["Photograph", "Ed Sheeran"]
-        ]
-    }
-};
-
+    Emotional: [
+        ["Perfect", "Ed Sheeran"],
+        ["Someone You Loved", "Lewis Capaldi"],
+        ["Fix You", "Coldplay"],
+        ["Photograph", "Ed Sheeran"],
+        ["Let Me Down Slowly", "Alec Benjamin"],
+        ["Memories", "Maroon 5"],
+        ["Lovely", "Billie Eilish & Khalid"],
+        ["Before You Go", "Lewis Capaldi"],
+        ["Dandelions", "Ruth B."],
+        ["A Thousand Years", "Christina Perri"]
+    ]
+},
 
 /* =========================
    FIND MUSIC
