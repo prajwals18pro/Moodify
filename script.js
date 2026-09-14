@@ -472,7 +472,7 @@ function findMusic() {
     }
 
 
-    const recommendedSongs = languageSongs[selectedMood];
+    const recommendedSongs = songs[selectedLanguage][selectedMood];
    alert("Songs found: " + recommendedSongs.length);
 
     if (!recommendedSongs) {
