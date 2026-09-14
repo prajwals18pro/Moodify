@@ -373,3 +373,15 @@ function findMusic() {
     document.getElementById("result")
         .scrollIntoView({ behavior: "smooth" });
 }
+function toggleTheme() {
+
+    document.body.classList.toggle("light-mode");
+
+    const button = document.querySelector(".theme-btn");
+
+    if (document.body.classList.contains("light-mode")) {
+        button.innerText = "☀️";
+    } else {
+        button.innerText = "🌙";
+    }
+}
