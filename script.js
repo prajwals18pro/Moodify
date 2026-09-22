@@ -1,916 +1,1436 @@
-/* =========================================
+/* =========================================================
    MOODIFY 2.0
-   COMPLETE SCRIPT
-   TOTAL: 280 SONGS
-
-   Kannada  = 100
-   Hindi    = 50
-   Tamil    = 50
-   Telugu   = 50
-   English  = 30
-
-   NO TRENDING
-   NO RECENTLY PLAYED
-========================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================
-       SETTINGS
-    ===================================== */
-
-    const moods = [
-        "Happy",
-        "Sad",
-        "Romantic",
-        "Energetic",
-        "Calm",
-        "Motivational",
-        "Chill"
-    ];
-
-    let selectedLanguage = "Kannada";
-    let selectedMood = "Happy";
-
-    const moodEmoji = {
-        Happy: "😊",
-        Sad: "😔",
-        Romantic: "❤️",
-        Energetic: "⚡",
-        Calm: "🌿",
-        Motivational: "🔥",
-        Chill: "😎"
-    };
+   CLEAN MUSIC ENGINE
+   ========================================================= */
 
 
-    /* =====================================
-       SONG DATABASE
-    ===================================== */
+/* ---------------------------------------------------------
+   SETTINGS
+--------------------------------------------------------- */
 
-    const songs = {
-
-        /* =================================
-           KANNADA — 100
-        ================================= */
-
-        Kannada: [
-
-            "Anisuthide Yaako Indu",
-            "Jothe Jotheyali",
-            "Minchagi Neenu Baralu",
-            "Ninnindale",
-            "Belageddu",
-            "Kaanada Kadalige",
-            "Karagida Baaninalli",
-            "Nee Sigovaregu",
-            "Neene Neene",
-            "Nooru Janmaku",
-            "Usire Usire",
-            "Kolle Nanna",
-            "Ondu Malebillu",
-            "Marali Manasaagide",
-            "Soul of Dia",
-            "Kushiyagide",
-            "Pogaru Title Track",
-            "Dostha Kano",
-            "Tagaru Banthu Tagaru",
-            "Salaam Rocky Bhai",
-            "Garbadhi",
-            "Sidila Bharava",
-            "Dheera Dheera",
-            "Toofan",
-            "Geleya Ennale",
-            "Ninnanu Nodida Mele",
-            "Nee Nanna Gellalare",
-            "Ee Sundara Beladingala",
-            "Hrudayake Hedarike",
-            "Hrudaya Haduthide",
-            "Preetham Gubbi",
-            "Naguva Nayana",
-            "Jeeva Hoovagide",
-            "Suvvali",
-            "Baare Baare",
-            "Yaava Mohana Murali",
-            "Kanaso Idu",
-            "Kariya I Love You",
-            "Hrudaya Rangoli",
-            "O Marave",
-            "Nodivalandava",
-            "Kannu Hodiyaka",
-            "Duniya Duniya",
-            "Karabuu",
-            "Pakka Local",
-            "Raambo 2 Theme",
-            "Chuttu Chuttu",
-            "Open the Bottle",
-            "Kotigobba 2 Title Track",
-            "Jeeva Hoovagide",
-            "Huttidare Kannada Nadalli Huttabeku",
-
-            "Yava Shilpi Kanda Kanaso",
-            "Hakkiyu Haarutide",
-            "Baana Daariyalli",
-            "Ee Sanje Yakagide",
-            "Naguva Nayana",
-            "Nee Enbathenna",
-            "Arare Shuruvayitu Hege",
-            "Kannu Kannu",
-            "Preethi Maadu Thappenilla",
-            "Preethi Endare Heege",
-            "Ondu Malebillu",
-            "Ninnaya Nalumeyinda",
-            "O Marave",
-            "Ninna Snehake",
-            "Marethuhoyithe",
-            "Kanasina Kaige",
-            "Ee Preethi Yeke Bhoomi Melide",
-            "Nee Nanna Gellalare",
-            "Cheluveye Ninna Nodalu",
-            "Yaare Neenu Cheluve",
-            "O Baby",
-            "Chandakintha Chanda",
-            "Hrudaya Hrudaya",
-            "Olavina Udugore",
-            "Preethse Preethse",
-            "Jeeva Hoovagide",
-            "Endendu Ninnanu Marethu",
-            "Nanna Preethiya Hudugi",
-            "Neenendare",
-            "Nee Nanna Jeeva",
-            "Sariyaagi Nenapide",
-            "Usire Usire",
-            "Marali Manasaagide",
-            "Neenire Saniha",
-            "Ninna Nodalentho",
-            "Kanna Sanneyindalene",
-            "Ninna Danigaagi",
-            "Ninnindale",
-            "Anisuthide",
-            "Jothe Jotheyali",
-            "Minchagi Neenu Baralu",
-            "Kushiyagide",
-            "Belageddu",
-            "Gombe Helutaite",
-            "Karagida Baaninalli",
-            "Nee Sigovaregu",
-            "Dheera Dheera",
-            "Salaam Rocky Bhai",
-            "Toofan",
-            "Tagaru Banthu Tagaru",
-            "Garbadhi",
-            "Pogaru Title Track",
-            "Kirik Party Title Track",
-            "Katheyondu Helide",
-            "Bombe Helutaite",
-            "Huttidare Kannada Nadalli",
-            "Kannada Gothilla",
-            "Appu Dance",
-            "Power of Youth",
-            "James Title Track",
-            "Raajakumara Title Track",
-            "Yenammi Yenammi",
-            "Chuttu Chuttu",
-            "Dostha Kano",
-            "Karabuu",
-            "Pakka Local",
-            "Duniya Duniya",
-            "Jeeva Hoovagide",
-            "Kannu Hodiyaka",
-            "Kariya I Love You",
-            "Hrudaya Haduthide",
-            "Naguva Nayana",
-            "Ee Sundara Beladingala",
-            "Hrudayake Hedarike",
-            "Kanaso Idu",
-            "Marali Manasaagide",
-            "Ondu Malebillu",
-            "Neene Neene",
-            "Nooru Janmaku",
-            "Usire Usire",
-            "Ninnindale",
-            "Nee Nanna Gellalare",
-            "Jothe Jotheyali",
-            "Anisuthide Yaako Indu",
-            "Baana Daariyalli",
-            "Ee Sanje Yakagide"
-
-        ],
+const moods = [
+    "Happy",
+    "Sad",
+    "Romantic",
+    "Energetic",
+    "Calm",
+    "Motivational",
+    "Chill"
+];
 
 
-        /* =================================
-           HINDI — 50
-        ================================= */
+let selectedLanguage = "Kannada";
 
-        Hindi: [
+let selectedMood = "Happy";
 
-            "Tum Se Hi",
-            "Agar Tum Saath Ho",
-            "Apna Bana Le",
-            "Kesariya",
-            "Tum Kya Mile",
-            "Tera Ban Jaunga",
-            "Hawayein",
-            "Raabta",
-            "Pehli Dafa",
-            "Khairiyat",
-            "Tujhe Kitna Chahne Lage",
-            "Ve Kamleya",
-            "Sajni",
-            "O Maahi",
-            "Heeriye",
-            "Chaleya",
-            "Satranga",
-            "Tere Vaaste",
-            "Ranjha",
-            "Shayad",
-            "Ilahi",
-            "Safarnama",
-            "Zindagi Ek Safar",
-            "Phir Se Ud Chala",
-            "Aashiyan",
-            "Kabira",
-            "Iktara",
-            "Agar Tum Mil Jao",
-            "Tera Yaar Hoon Main",
-            "Channa Mereya",
-            "Ae Dil Hai Mushkil",
-            "Muskurane",
-            "Samjhawan",
-            "Pee Loon",
-            "Tum Hi Ho",
-            "Maan Meri Jaan",
-            "Baarishein",
-            "Dil Diyan Gallan",
-            "Tera Fitoor",
-            "Janam Janam",
-            "Gerua",
-            "Deva Deva",
-            "Zinda",
-            "Kar Har Maidaan Fateh",
-            "Apna Time Aayega",
-            "Ziddi Dil",
-            "Lakshya",
-            "Brothers Anthem",
-            "Sultan Title Track",
-            "Dildaara"
-        ],
+let currentSongs = [];
+
+let currentSongIndex = -1;
+
+let currentSong = null;
+
+let player = null;
+
+let playerReady = false;
 
 
-        /* =================================
-           TAMIL — 50
-        ================================= */
+/* ---------------------------------------------------------
+   SONG DATABASE
+--------------------------------------------------------- */
 
-        Tamil: [
+/*
+ IMPORTANT:
 
-            "Munbe Vaa",
-            "Vaseegara",
-            "New York Nagaram",
-            "Ennodu Nee Irundhaal",
-            "Thalli Pogathey",
-            "Maruvaarthai",
-            "Kaathalae Kaathalae",
-            "Nenjukkul Peidhidum",
-            "Hosanna",
-            "Omana Penne",
-            "Mental Manadhil",
-            "Aalaporan Tamizhan",
-            "Rowdy Baby",
-            "Vaathi Coming",
-            "Arabic Kuthu",
-            "Megham Karukatha",
-            "Jimikki Ponnu",
-            "Tum Tum",
-            "Chellamma",
-            "Enjoy Enjaami",
-            "Katchi Sera",
-            "Achacho",
-            "Anbe En Anbe",
-            "Kadhal Anukkal",
-            "Pachai Kiligal",
-            "Suttrum Vizhi",
-            "Unakkenna Venum Sollu",
-            "Un Vizhigalil",
-            "Yaanji",
-            "High On Love",
-            "Inkem Inkem",
-            "Why This Kolaveri Di",
-            "Chellamma",
-            "Dharala Prabhu",
-            "Kutty Story",
-            "Life of Ram",
-            "The Life of Ram",
-            "Po Nee Po",
-            "Kanave Unai",
-            "Oru Devathai",
-            "Idhazhin Oram",
-            "Enkeyoo Paartha",
-            "Kadhal Oru Aagayam",
-            "Aathadi Aathadi",
-            "Nenjame",
-            "Megham Karukatha",
-            "Vennilave Vennilave",
-            "Uyire Uyire",
-            "Kadhal Sadugudu",
-            "Pookkalae Sattru Oyivedungal"
-        ],
+ Every song has:
+
+ title
+ language
+ mood
+ videoId
+
+ videoId is intentionally empty for now.
+
+ We will add VERIFIED YouTube IDs later.
+
+ We do NOT generate IDs randomly.
+*/
 
 
-        /* =================================
-           TELUGU — 50
-        ================================= */
+const songs = [
 
-        Telugu: [
+    /* =========================
+       KANNADA
+    ========================= */
 
-            "Inkem Inkem Inkem Kaavaale",
-            "Samajavaragamana",
-            "Butta Bomma",
-            "Vachindamma",
-            "Maate Vinadhuga",
-            "Adiga Adiga",
-            "Nee Kannu Neeli Samudram",
-            "Kadalalle",
-            "Oh Sita Hey Rama",
-            "Naa Roja Nuvve",
-            "Priyathama Priyathama",
-            "Inthandham",
-            "Darshana",
-            "Aradhya",
-            "Pilla Raa",
-            "Yenti Yenti",
-            "Undiporaadhey",
-            "Emo Emo",
-            "Nee Neeli Kannullona",
-            "Yemito",
-            "Chuttamalle",
-            "Kurchi Madathapetti",
-            "Oo Antava Oo Oo Antava",
-            "Srivalli",
-            "Daakko Daakko Meka",
-            "Ramuloo Ramulaa",
-            "Mind Block",
-            "Top Lesi Poddi",
-            "Blockbuster",
-            "Ringa Ringa",
-            "Saami Saami",
-            "Pushpa Pushpa",
-            "Dosti",
-            "Komuram Bheemudo",
-            "Naatu Naatu",
-            "Etthara Jenda",
-            "Komma Uyyala",
-            "Penny",
-            "Kalaavathi",
-            "Penny",
-            "Kadalalle",
-            "Padi Padi Leche Manasu",
-            "Oohale",
-            "Nee Kallalona",
-            "Adiga Adiga",
-            "Priyathama",
-            "Ninnila Ninnila",
-            "Vellipomaakey",
-            "Yenti Yenti",
-            "Naa Kanule",
-            "Choosi Chudangane"
-        ],
+    {
+        title: "Belageddu",
+        language: "Kannada",
+        mood: "Happy",
+        videoId: ""
+    },
 
+    {
+        title: "Anisuthide Yaako Indu",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
 
-        /* =================================
-           ENGLISH — 30
-        ================================= */
+    {
+        title: "Jotheyali Jothe Jotheyali",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
 
-        English: [
+    {
+        title: "Minchagi Neenu Baralu",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
 
-            "Perfect",
-            "Shape of You",
-            "Photograph",
-            "Thinking Out Loud",
-            "Love Yourself",
-            "Until I Found You",
-            "Golden Hour",
-            "Die With A Smile",
-            "Beautiful Things",
-            "Night Changes",
-            "Story of My Life",
-            "A Thousand Years",
-            "Someone You Loved",
-            "Lovely",
-            "Let Me Down Slowly",
-            "Dandelions",
-            "Attention",
-            "Blinding Lights",
-            "Save Your Tears",
-            "As It Was",
-            "Levitating",
-            "Flowers",
-            "Cruel Summer",
-            "Anti-Hero",
-            "Espresso",
-            "Sao Paulo",
-            "Believer",
-            "Unstoppable",
-            "Counting Stars",
-            "Hall of Fame"
-        ]
+    {
+        title: "Ninnindale",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
 
-    };
+    {
+        title: "Kaanada Kadalige",
+        language: "Kannada",
+        mood: "Calm",
+        videoId: ""
+    },
+
+    {
+        title: "Naguva Nayana",
+        language: "Kannada",
+        mood: "Calm",
+        videoId: ""
+    },
+
+    {
+        title: "Nooru Janmaku",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Nee Nanna Gellalare",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Omme Ninnannu",
+        language: "Kannada",
+        mood: "Romantic",
+        videoId: ""
+    },
 
 
-    /* =====================================
-       CONVERT SONGS TO OBJECTS
-    ===================================== */
+    /* =========================
+       HINDI
+    ========================= */
 
-    let allSongs = [];
+    {
+        title: "Tum Hi Ho",
+        language: "Hindi",
+        mood: "Romantic",
+        videoId: ""
+    },
 
-    Object.keys(songs).forEach(language => {
+    {
+        title: "Agar Tum Saath Ho",
+        language: "Hindi",
+        mood: "Sad",
+        videoId: ""
+    },
 
-        songs[language].forEach((title, index) => {
+    {
+        title: "Ilahi",
+        language: "Hindi",
+        mood: "Happy",
+        videoId: ""
+    },
 
-            const mood = moods[index % moods.length];
+    {
+        title: "Zinda",
+        language: "Hindi",
+        mood: "Motivational",
+        videoId: ""
+    },
 
-            allSongs.push({
-                id: `${language}-${index + 1}`,
-                title: title,
-                artist: "Listen on YouTube",
-                language: language,
-                mood: mood
-            });
+    {
+        title: "Kar Har Maidaan Fateh",
+        language: "Hindi",
+        mood: "Motivational",
+        videoId: ""
+    },
 
-        });
+    {
+        title: "Apna Bana Le",
+        language: "Hindi",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Kesariya",
+        language: "Hindi",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Chaleya",
+        language: "Hindi",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Heeriye",
+        language: "Hindi",
+        mood: "Chill",
+        videoId: ""
+    },
+
+    {
+        title: "Dildaara",
+        language: "Hindi",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+
+    /* =========================
+       TAMIL
+    ========================= */
+
+    {
+        title: "Munbe Vaa",
+        language: "Tamil",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Vaseegara",
+        language: "Tamil",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "New York Nagaram",
+        language: "Tamil",
+        mood: "Sad",
+        videoId: ""
+    },
+
+    {
+        title: "Why This Kolaveri Di",
+        language: "Tamil",
+        mood: "Happy",
+        videoId: ""
+    },
+
+    {
+        title: "Vaathi Coming",
+        language: "Tamil",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Arabic Kuthu",
+        language: "Tamil",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Megham Karukatha",
+        language: "Tamil",
+        mood: "Chill",
+        videoId: ""
+    },
+
+    {
+        title: "Nenjukkul Peidhidum",
+        language: "Tamil",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Rowdy Baby",
+        language: "Tamil",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Enjoy Enjaami",
+        language: "Tamil",
+        mood: "Happy",
+        videoId: ""
+    },
+
+
+    /* =========================
+       TELUGU
+    ========================= */
+
+    {
+        title: "Inkem Inkem Inkem Kaavaale",
+        language: "Telugu",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Samajavaragamana",
+        language: "Telugu",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Butta Bomma",
+        language: "Telugu",
+        mood: "Happy",
+        videoId: ""
+    },
+
+    {
+        title: "Srivalli",
+        language: "Telugu",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Oo Antava Oo Oo Antava",
+        language: "Telugu",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Ramuloo Ramulaa",
+        language: "Telugu",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Vachindamma",
+        language: "Telugu",
+        mood: "Happy",
+        videoId: ""
+    },
+
+    {
+        title: "Maate Vinadhuga",
+        language: "Telugu",
+        mood: "Chill",
+        videoId: ""
+    },
+
+    {
+        title: "Inthandham",
+        language: "Telugu",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Adiga Adiga",
+        language: "Telugu",
+        mood: "Sad",
+        videoId: ""
+    },
+
+
+    /* =========================
+       ENGLISH
+    ========================= */
+
+    {
+        title: "Perfect",
+        language: "English",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Shape of You",
+        language: "English",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Believer",
+        language: "English",
+        mood: "Motivational",
+        videoId: ""
+    },
+
+    {
+        title: "Counting Stars",
+        language: "English",
+        mood: "Motivational",
+        videoId: ""
+    },
+
+    {
+        title: "Let Her Go",
+        language: "English",
+        mood: "Sad",
+        videoId: ""
+    },
+
+    {
+        title: "Someone You Loved",
+        language: "English",
+        mood: "Sad",
+        videoId: ""
+    },
+
+    {
+        title: "Until I Found You",
+        language: "English",
+        mood: "Romantic",
+        videoId: ""
+    },
+
+    {
+        title: "Golden Hour",
+        language: "English",
+        mood: "Chill",
+        videoId: ""
+    },
+
+    {
+        title: "Sao Paulo",
+        language: "English",
+        mood: "Energetic",
+        videoId: ""
+    },
+
+    {
+        title: "Blinding Lights",
+        language: "English",
+        mood: "Energetic",
+        videoId: ""
+    }
+
+];
+
+
+/* ---------------------------------------------------------
+   DOM
+--------------------------------------------------------- */
+
+const languageButtons =
+    document.querySelectorAll(".language-btn");
+
+const moodButtons =
+    document.querySelectorAll(".mood-btn");
+
+const findMusicBtn =
+    document.getElementById("findMusicBtn");
+
+const songsContainer =
+    document.getElementById("songsContainer");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const songCount =
+    document.getElementById("songCount");
+
+const themeBtn =
+    document.getElementById("themeBtn");
+
+const playerSongTitle =
+    document.getElementById("playerSongTitle");
+
+const playerSongArtist =
+    document.getElementById("playerSongArtist");
+
+const playerStatus =
+    document.getElementById("playerStatus");
+
+const playPauseBtn =
+    document.getElementById("playPauseBtn");
+
+const previousBtn =
+    document.getElementById("previousBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const playerFavoriteBtn =
+    document.getElementById("playerFavoriteBtn");
+
+const favoritesContainer =
+    document.getElementById("favoritesContainer");
+
+
+/* ---------------------------------------------------------
+   LANGUAGE SELECTION
+--------------------------------------------------------- */
+
+languageButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        languageButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        selectedLanguage =
+            button.dataset.language;
+
+        renderSongs();
 
     });
 
-
-    /* =====================================
-       DOM ELEMENTS
-    ===================================== */
-
-    const songsContainer =
-        document.getElementById("songsContainer");
-
-    const favoritesContainer =
-        document.getElementById("favoritesContainer");
-
-    const favoriteCount =
-        document.getElementById("favoriteCount");
-
-    const songCount =
-        document.getElementById("songCount");
-
-    const resultTitle =
-        document.getElementById("resultTitle");
-
-    const findMusicBtn =
-        document.getElementById("findMusicBtn");
-
-    const themeBtn =
-        document.getElementById("themeBtn");
+});
 
 
-    /* =====================================
-       FAVORITES
-    ===================================== */
+/* ---------------------------------------------------------
+   MOOD SELECTION
+--------------------------------------------------------- */
 
-    let favorites =
-        JSON.parse(
-            localStorage.getItem("moodifyFavorites") || "[]"
+moodButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        moodButtons.forEach(btn =>
+            btn.classList.remove("active")
         );
 
+        button.classList.add("active");
 
-    /* =====================================
-       YOUTUBE
-    ===================================== */
+        selectedMood =
+            button.dataset.mood;
 
-    function openSong(song) {
+        renderSongs();
 
-        const query =
-            encodeURIComponent(
-                `${song.title} ${song.language} song`
-            );
+    });
 
-        const url =
-            `https://www.youtube.com/results?search_query=${query}`;
+});
 
-        window.open(url, "_blank");
 
-    }
+/* ---------------------------------------------------------
+   FILTER SONGS
+--------------------------------------------------------- */
 
+function getFilteredSongs() {
 
-    /* =====================================
-       DISPLAY SONGS
-    ===================================== */
+    return songs.filter(song =>
 
-    function displaySongs() {
+        song.language === selectedLanguage &&
 
-        const filteredSongs =
-            allSongs.filter(song =>
-                song.language === selectedLanguage &&
-                song.mood === selectedMood
-            );
+        song.mood === selectedMood
 
-        songsContainer.innerHTML = "";
-
-        resultTitle.textContent =
-            `${selectedLanguage} • ${selectedMood}`;
-
-        songCount.textContent =
-            filteredSongs.length;
-
-
-        if (filteredSongs.length === 0) {
-
-            songsContainer.innerHTML = `
-                <div class="empty-message">
-                    No songs found for this selection.
-                </div>
-            `;
-
-            return;
-        }
-
-
-        filteredSongs.forEach((song, index) => {
-
-            const card =
-                document.createElement("article");
-
-            card.className = "song-card";
-
-            const isFavorite =
-                favorites.includes(song.id);
-
-
-            card.innerHTML = `
-
-                <div class="song-number">
-                    #${index + 1}
-                </div>
-
-                <div class="song-info">
-
-                    <div class="song-title">
-                        ${escapeHTML(song.title)}
-                    </div>
-
-                    <div class="song-artist">
-                        ▶ Tap to listen on YouTube
-                    </div>
-
-                </div>
-
-                <div class="song-footer">
-
-                    <span class="song-language">
-                        ${moodEmoji[song.mood]}
-                        ${song.language}
-                    </span>
-
-                    <button
-                        class="favorite-btn ${isFavorite ? "active" : ""}"
-                        data-id="${song.id}"
-                        aria-label="Favorite">
-
-                        ${isFavorite ? "♥" : "♡"}
-
-                    </button>
-
-                </div>
-            `;
-
-
-            /* Song card opens YouTube */
-
-            card.addEventListener("click", event => {
-
-                if (
-                    event.target.closest(".favorite-btn")
-                ) {
-                    return;
-                }
-
-                openSong(song);
-
-            });
-
-
-            /* Favorite button */
-
-            const favoriteBtn =
-                card.querySelector(".favorite-btn");
-
-
-            favoriteBtn.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    toggleFavorite(song.id);
-
-                }
-            );
-
-
-            songsContainer.appendChild(card);
-
-        });
-
-    }
-
-
-    /* =====================================
-       FAVORITE TOGGLE
-    ===================================== */
-
-    function toggleFavorite(id) {
-
-        if (favorites.includes(id)) {
-
-            favorites =
-                favorites.filter(
-                    favoriteId => favoriteId !== id
-                );
-
-        } else {
-
-            favorites.push(id);
-
-        }
-
-
-        localStorage.setItem(
-            "moodifyFavorites",
-            JSON.stringify(favorites)
-        );
-
-
-        displaySongs();
-        displayFavorites();
-
-    }
-
-
-    /* =====================================
-       FAVORITES DISPLAY
-    ===================================== */
-
-    function displayFavorites() {
-
-        favoriteCount.textContent =
-            favorites.length;
-
-
-        if (favorites.length === 0) {
-
-            favoritesContainer.innerHTML = `
-                <p class="empty-message">
-                    ❤️ Your favorite songs will appear here.
-                </p>
-            `;
-
-            return;
-
-        }
-
-
-        favoritesContainer.innerHTML = "";
-
-
-        favorites.forEach(id => {
-
-            const song =
-                allSongs.find(
-                    item => item.id === id
-                );
-
-
-            if (!song) return;
-
-
-            const item =
-                document.createElement("div");
-
-            item.className = "favorite-item";
-
-
-            item.innerHTML = `
-
-                <div class="favorite-item-info">
-
-                    <div class="favorite-item-title">
-                        ${escapeHTML(song.title)}
-                    </div>
-
-                    <div class="favorite-item-artist">
-                        ${song.language} • ${song.mood}
-                    </div>
-
-                </div>
-
-                <button
-                    class="remove-favorite"
-                    data-id="${song.id}">
-                    ♥
-                </button>
-
-            `;
-
-
-            item.addEventListener(
-                "click",
-                event => {
-
-                    if (
-                        event.target.closest(
-                            ".remove-favorite"
-                        )
-                    ) {
-                        return;
-                    }
-
-                    openSong(song);
-
-                }
-            );
-
-
-            item.querySelector(
-                ".remove-favorite"
-            ).addEventListener(
-                "click",
-                () => {
-
-                    toggleFavorite(song.id);
-
-                }
-            );
-
-
-            favoritesContainer.appendChild(item);
-
-        });
-
-    }
-
-
-    /* =====================================
-       LANGUAGE BUTTONS
-    ===================================== */
-
-    document
-        .querySelectorAll(".language-btn")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    document
-                        .querySelectorAll(
-                            ".language-btn"
-                        )
-                        .forEach(btn =>
-                            btn.classList.remove("active")
-                        );
-
-                    button.classList.add("active");
-
-                    selectedLanguage =
-                        button.dataset.language;
-
-                    displaySongs();
-
-                }
-            );
-
-        });
-
-
-    /* =====================================
-       MOOD BUTTONS
-    ===================================== */
-
-    document
-        .querySelectorAll(".mood-btn")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    document
-                        .querySelectorAll(".mood-btn")
-                        .forEach(btn =>
-                            btn.classList.remove("active")
-                        );
-
-                    button.classList.add("active");
-
-                    selectedMood =
-                        button.dataset.mood;
-
-                    displaySongs();
-
-                }
-            );
-
-        });
-
-
-    /* =====================================
-       FIND MUSIC BUTTON
-    ===================================== */
-
-    findMusicBtn.addEventListener(
-        "click",
-        () => {
-
-            displaySongs();
-
-            document
-                .getElementById("songsContainer")
-                .scrollIntoView({
-                    behavior: "smooth"
-                });
-
-        }
     );
 
-
-    /* =====================================
-       THEME
-    ===================================== */
-
-    const savedTheme =
-        localStorage.getItem("moodifyTheme");
+}
 
 
-    if (savedTheme === "light") {
+/* ---------------------------------------------------------
+   RENDER SONGS
+--------------------------------------------------------- */
 
-        document.body.classList.add("light");
+function renderSongs() {
 
-        themeBtn.textContent = "☀️";
+    currentSongs =
+        getFilteredSongs();
+
+    resultTitle.textContent =
+        `${selectedLanguage} • ${selectedMood}`;
+
+    songCount.textContent =
+        currentSongs.length;
+
+    songsContainer.innerHTML = "";
+
+
+    if (currentSongs.length === 0) {
+
+        songsContainer.innerHTML = `
+
+            <div class="empty-favorites">
+
+                🎵
+
+                <p>
+                    More songs coming soon for this mood.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    currentSongs.forEach((song, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "song-card";
+
+
+        const favorite =
+            isFavorite(song);
+
+
+        card.innerHTML = `
+
+            <div class="song-number">
+                ${index + 1}
+            </div>
+
+            <div class="song-icon">
+                🎵
+            </div>
+
+            <div class="song-details">
+
+                <h3>
+                    ${escapeHTML(song.title)}
+                </h3>
+
+                <p>
+                    ${song.language} • ${song.mood}
+                </p>
+
+            </div>
+
+            <button
+                class="favorite-btn
+                ${favorite ? "active" : ""}"
+                aria-label="Favorite">
+
+                ${favorite ? "♥" : "♡"}
+
+            </button>
+
+        `;
+
+
+        /* CARD PLAY */
+
+        card.addEventListener("click", event => {
+
+            if (
+                event.target.closest(".favorite-btn")
+            ) {
+                return;
+            }
+
+            playSong(index);
+
+        });
+
+
+        /* FAVORITE */
+
+        const favoriteBtn =
+            card.querySelector(".favorite-btn");
+
+
+        favoriteBtn.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                toggleFavorite(song);
+
+                renderSongs();
+
+                renderFavorites();
+
+                if (
+                    currentSong &&
+                    currentSong.title === song.title
+                ) {
+
+                    updatePlayerFavorite();
+
+                }
+
+            }
+        );
+
+
+        songsContainer.appendChild(card);
+
+    });
+
+}
+
+
+/* ---------------------------------------------------------
+   PLAYER
+--------------------------------------------------------- */
+
+function playSong(index) {
+
+    if (
+        index < 0 ||
+        index >= currentSongs.length
+    ) {
+        return;
+    }
+
+
+    currentSongIndex = index;
+
+    currentSong =
+        currentSongs[index];
+
+
+    playerSongTitle.textContent =
+        currentSong.title;
+
+
+    playerSongArtist.textContent =
+        `${currentSong.language} • ${currentSong.mood}`;
+
+
+    updatePlayerFavorite();
+
+
+    /*
+       VIDEO ID WILL BE CONNECTED
+       AFTER VERIFIED IDs ARE ADDED.
+    */
+
+    if (
+        currentSong.videoId &&
+        playerReady
+    ) {
+
+        player.loadVideoById(
+            currentSong.videoId
+        );
+
+        playerStatus.textContent =
+            "Playing";
+
+        playPauseBtn.textContent =
+            "❚❚";
 
     } else {
 
-        themeBtn.textContent = "🌙";
+        playerStatus.textContent =
+            "Video connection coming next";
+
+        playPauseBtn.textContent =
+            "▶";
 
     }
 
 
-    themeBtn.addEventListener(
-        "click",
-        () => {
+    document
+        .getElementById("musicPlayer")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
-            document.body.classList.toggle("light");
+}
 
-            const isLight =
-                document.body.classList.contains("light");
 
+/* ---------------------------------------------------------
+   PREVIOUS
+--------------------------------------------------------- */
+
+previousBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!currentSongs.length) {
+            return;
+        }
+
+
+        let index =
+            currentSongIndex - 1;
+
+
+        if (index < 0) {
+
+            index =
+                currentSongs.length - 1;
+
+        }
+
+
+        playSong(index);
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   NEXT
+--------------------------------------------------------- */
+
+nextBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!currentSongs.length) {
+            return;
+        }
+
+
+        let index =
+            currentSongIndex + 1;
+
+
+        if (
+            index >= currentSongs.length
+        ) {
+
+            index = 0;
+
+        }
+
+
+        playSong(index);
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   PLAY / PAUSE
+--------------------------------------------------------- */
+
+playPauseBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!playerReady) {
+
+            playerStatus.textContent =
+                "Select a connected song first.";
+
+            return;
+
+        }
+
+
+        if (!currentSong) {
+
+            playerStatus.textContent =
+                "Tap a song first.";
+
+            return;
+
+        }
+
+
+        const state =
+            player.getPlayerState();
+
+
+        if (
+            state === YT.PlayerState.PLAYING
+        ) {
+
+            player.pauseVideo();
+
+        } else {
+
+            player.playVideo();
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   YOUTUBE API
+--------------------------------------------------------- */
+
+function onYouTubeIframeAPIReady() {
+
+    player =
+        new YT.Player(
+            "youtubePlayer",
+            {
+
+                height: "100%",
+
+                width: "100%",
+
+                videoId: "",
+
+                playerVars: {
+
+                    playsinline: 1,
+
+                    controls: 1,
+
+                    rel: 0
+
+                },
+
+                events: {
+
+                    onReady:
+                        onPlayerReady,
+
+                    onStateChange:
+                        onPlayerStateChange,
+
+                    onAutoplayBlocked:
+                        onAutoplayBlocked
+
+                }
+
+            }
+        );
+
+}
+
+
+function onPlayerReady() {
+
+    playerReady = true;
+
+    playerStatus.textContent =
+        "Player ready";
+
+}
+
+
+function onPlayerStateChange(event) {
+
+    if (
+        event.data ===
+        YT.PlayerState.PLAYING
+    ) {
+
+        playPauseBtn.textContent =
+            "❚❚";
+
+        playerStatus.textContent =
+            "Playing";
+
+    }
+
+
+    if (
+        event.data ===
+        YT.PlayerState.PAUSED
+    ) {
+
+        playPauseBtn.textContent =
+            "▶";
+
+        playerStatus.textContent =
+            "Paused";
+
+    }
+
+
+    if (
+        event.data ===
+        YT.PlayerState.ENDED
+    ) {
+
+        playPauseBtn.textContent =
+            "▶";
+
+        playerStatus.textContent =
+            "Finished";
+
+        nextSong();
+
+    }
+
+}
+
+
+function onAutoplayBlocked() {
+
+    playerStatus.textContent =
+        "Tap play to start the song";
+
+}
+
+
+/* ---------------------------------------------------------
+   NEXT SONG AFTER FINISH
+--------------------------------------------------------- */
+
+function nextSong() {
+
+    if (!currentSongs.length) {
+        return;
+    }
+
+
+    let index =
+        currentSongIndex + 1;
+
+
+    if (
+        index >= currentSongs.length
+    ) {
+
+        index = 0;
+
+    }
+
+
+    playSong(index);
+
+}
+
+
+/* ---------------------------------------------------------
+   FAVORITES
+--------------------------------------------------------- */
+
+function getFavorites() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "moodifyFavorites"
+            )
+        ) || [];
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+function saveFavorites(favorites) {
+
+    localStorage.setItem(
+        "moodifyFavorites",
+        JSON.stringify(favorites)
+    );
+
+}
+
+
+function isFavorite(song) {
+
+    return getFavorites().some(
+        item =>
+            item.title === song.title &&
+            item.language === song.language
+    );
+
+}
+
+
+function toggleFavorite(song) {
+
+    let favorites =
+        getFavorites();
+
+
+    const exists =
+        favorites.findIndex(
+            item =>
+                item.title === song.title &&
+                item.language === song.language
+        );
+
+
+    if (exists >= 0) {
+
+        favorites.splice(
+            exists,
+            1
+        );
+
+    } else {
+
+        favorites.push(song);
+
+    }
+
+
+    saveFavorites(favorites);
+
+}
+
+
+/* ---------------------------------------------------------
+   PLAYER FAVORITE
+--------------------------------------------------------- */
+
+playerFavoriteBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!currentSong) {
+            return;
+        }
+
+
+        toggleFavorite(currentSong);
+
+        updatePlayerFavorite();
+
+        renderFavorites();
+
+        renderSongs();
+
+    }
+);
+
+
+function updatePlayerFavorite() {
+
+    if (!currentSong) {
+
+        playerFavoriteBtn.textContent =
+            "♡";
+
+        return;
+
+    }
+
+
+    if (isFavorite(currentSong)) {
+
+        playerFavoriteBtn.textContent =
+            "♥";
+
+        playerFavoriteBtn.classList.add(
+            "active"
+        );
+
+    } else {
+
+        playerFavoriteBtn.textContent =
+            "♡";
+
+        playerFavoriteBtn.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   FAVORITES LIST
+--------------------------------------------------------- */
+
+function renderFavorites() {
+
+    const favorites =
+        getFavorites();
+
+
+    favoritesContainer.innerHTML = "";
+
+
+    if (!favorites.length) {
+
+        favoritesContainer.innerHTML = `
+
+            <div class="empty-favorites">
+
+                ❤️
+
+                <p>
+                    No favorites yet
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    favorites.forEach(song => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "song-card";
+
+
+        card.innerHTML = `
+
+            <div class="song-icon">
+                ❤️
+            </div>
+
+            <div class="song-details">
+
+                <h3>
+                    ${escapeHTML(song.title)}
+                </h3>
+
+                <p>
+                    ${song.language} • ${song.mood}
+                </p>
+
+            </div>
+
+        `;
+
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    currentSongs.findIndex(
+                        item =>
+                            item.title ===
+                            song.title &&
+                            item.language ===
+                            song.language
+                    );
+
+
+                if (index >= 0) {
+
+                    playSong(index);
+
+                } else {
+
+                    selectedLanguage =
+                        song.language;
+
+                    selectedMood =
+                        song.mood;
+
+
+                    syncButtons();
+
+                    renderSongs();
+
+
+                    const newIndex =
+                        currentSongs.findIndex(
+                            item =>
+                                item.title ===
+                                song.title
+                        );
+
+
+                    if (newIndex >= 0) {
+
+                        playSong(newIndex);
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        favoritesContainer.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
+/* ---------------------------------------------------------
+   THEME
+--------------------------------------------------------- */
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        if (
+            document.body.classList.contains(
+                "light"
+            )
+        ) {
 
             themeBtn.textContent =
-                isLight ? "☀️" : "🌙";
-
+                "☀️";
 
             localStorage.setItem(
                 "moodifyTheme",
-                isLight ? "light" : "dark"
+                "light"
+            );
+
+        } else {
+
+            themeBtn.textContent =
+                "🌙";
+
+            localStorage.setItem(
+                "moodifyTheme",
+                "dark"
+            );
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   LOAD THEME
+--------------------------------------------------------- */
+
+function loadTheme() {
+
+    const theme =
+        localStorage.getItem(
+            "moodifyTheme"
+        );
+
+
+    if (theme === "light") {
+
+        document.body.classList.add(
+            "light"
+        );
+
+        themeBtn.textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   SYNC BUTTONS
+--------------------------------------------------------- */
+
+function syncButtons() {
+
+    languageButtons.forEach(
+        button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.language ===
+                selectedLanguage
             );
 
         }
     );
 
 
-    /* =====================================
-       SECURITY
-    ===================================== */
+    moodButtons.forEach(
+        button => {
 
-    function escapeHTML(value) {
+            button.classList.toggle(
+                "active",
+                button.dataset.mood ===
+                selectedMood
+            );
 
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+        }
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   HTML SAFETY
+--------------------------------------------------------- */
+
+function escapeHTML(text) {
+
+    return String(text)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ---------------------------------------------------------
+   FIND MUSIC BUTTON
+--------------------------------------------------------- */
+
+findMusicBtn.addEventListener(
+    "click",
+    () => {
+
+        renderSongs();
+
+
+        document
+            .getElementById(
+                "songsContainer"
+            )
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
 
     }
+);
 
 
-    /* =====================================
-       START
-    ===================================== */
+/* ---------------------------------------------------------
+   START
+--------------------------------------------------------- */
 
-    displaySongs();
-    displayFavorites();
+loadTheme();
 
+syncButtons();
 
-    console.log(
-        "🎵 Moodify 2.0 loaded successfully!"
-    );
+renderSongs();
 
-    console.log(
-        `Total songs: ${allSongs.length}`
-    );
-
-});
+renderFavorites();
