@@ -1,1436 +1,1351 @@
 /* =========================================================
    MOODIFY 2.0
-   CLEAN MUSIC ENGINE
+   MUSIC DATABASE + FILTER + FAVORITES + PLAYER
    ========================================================= */
-
-
-/* ---------------------------------------------------------
-   SETTINGS
---------------------------------------------------------- */
-
-const moods = [
-    "Happy",
-    "Sad",
-    "Romantic",
-    "Energetic",
-    "Calm",
-    "Motivational",
-    "Chill"
-];
-
-
-let selectedLanguage = "Kannada";
-
-let selectedMood = "Happy";
-
-let currentSongs = [];
-
-let currentSongIndex = -1;
-
-let currentSong = null;
-
-let player = null;
-
-let playerReady = false;
-
-
-/* ---------------------------------------------------------
-   SONG DATABASE
---------------------------------------------------------- */
-
-/*
- IMPORTANT:
-
- Every song has:
-
- title
- language
- mood
- videoId
-
- videoId is intentionally empty for now.
-
- We will add VERIFIED YouTube IDs later.
-
- We do NOT generate IDs randomly.
-*/
-
 
 const songs = [
 
-    /* =========================
-       KANNADA
-    ========================= */
+/* =========================================================
+   KANNADA — 200
+   ========================================================= */
 
-    {
-        title: "Belageddu",
-        language: "Kannada",
-        mood: "Happy",
-        videoId: ""
-    },
+["Anisuthide Yaako Indu","Sonu Nigam","Romantic","Kannada"],
+["Nee Sigovaregu","Vijay Prakash","Romantic","Kannada"],
+["Jeeva Hoovagide","S. P. Balasubrahmanyam","Calm","Kannada"],
+["Jothe Jotheyali","S. P. Balasubrahmanyam","Romantic","Kannada"],
+["Naguva Nayana","S. P. Balasubrahmanyam","Romantic","Kannada"],
+["Bombe Helutaithe","Vijay Prakash","Calm","Kannada"],
+["Minchagi Neenu Baralu","Sonu Nigam","Romantic","Kannada"],
+["Marali Manasaagide","Sid Sriram","Romantic","Kannada"],
+["Neene Neene","Sonu Nigam","Romantic","Kannada"],
+["Nooru Janmaku","Sonu Nigam","Romantic","Kannada"],
+["Mungaru Maleye","Sonu Nigam","Calm","Kannada"],
+["Suvvali","Sonu Nigam","Romantic","Kannada"],
+["Ee Sanje Yakagide","Sonu Nigam","Romantic","Kannada"],
+["Ondu Malebillu","Armaan Malik","Romantic","Kannada"],
+["Kariye Kariye","Sonu Nigam","Sad","Kannada"],
+["Hrudayake Hedarike","Sonu Nigam","Romantic","Kannada"],
+["Yaava Mohana Murali","S. P. Balasubrahmanyam","Calm","Kannada"],
+["Duniya Duniya","Sonu Nigam","Sad","Kannada"],
+["Nee Enbathina","Vijay Prakash","Romantic","Kannada"],
+["Ninnindale","Sonu Nigam","Romantic","Kannada"],
+["Ninnannu Nodida","Sonu Nigam","Romantic","Kannada"],
+["Kaanada Kadalige","S. Janaki","Calm","Kannada"],
+["Nagu Naguta Nali","S. P. Balasubrahmanyam","Happy","Kannada"],
+["Yenendu Hesaridali","Sonu Nigam","Romantic","Kannada"],
+["Ninnaseya","Vijay Prakash","Romantic","Kannada"],
+["Ee Sundara Beladingala","S. P. Balasubrahmanyam","Calm","Kannada"],
+["Kanaso Idu","Sonu Nigam","Romantic","Kannada"],
+["Marethuhoyithe","Sanjith Hegde","Sad","Kannada"],
+["Soul of Dia","Siddhartha Belmannu","Romantic","Kannada"],
+["Belageddu","Vijay Prakash","Happy","Kannada"],
+["Kushiyagide","Vijay Prakash","Happy","Kannada"],
+["Baanali Badalago","S. P. Balasubrahmanyam","Calm","Kannada"],
+["Nanna Preethiya Hudugi","Sonu Nigam","Romantic","Kannada"],
+["Nanna Ninna Naduvalli","Sonu Nigam","Romantic","Kannada"],
+["Kannu Hodiyaka","Vijay Prakash","Happy","Kannada"],
+["Salaam Rocky Bhai","Vijay Prakash","Energetic","Kannada"],
+["Dheera Dheera","Mohan Krishna","Energetic","Kannada"],
+["Garbadhi","Supriya Lohith","Romantic","Kannada"],
+["Puneeth","Vijay Prakash","Energetic","Kannada"],
+["Tagaru Banthu Tagaru","Anthony Daasan","Energetic","Kannada"],
+["Tagaru Title Track","Charan Raj","Energetic","Kannada"],
+["Badava Rascal Title Track","Charan Raj","Energetic","Kannada"],
+["Kirik Party","Rakshit Shetty","Happy","Kannada"],
+["Belageddu","Vijay Prakash","Happy","Kannada"],
+["Thirboki Jeevana","Vijay Prakash","Energetic","Kannada"],
+["Karabuu","Shashank Sheshagiri","Energetic","Kannada"],
+["Chuttu Chuttu","Ravindra Soragavi","Happy","Kannada"],
+["Yenammi Yenammi","Vijay Prakash","Happy","Kannada"],
+["Jeeva Hoovagide","S. P. Balasubrahmanyam","Calm","Kannada"],
+["Nee Nanna Gellalare","S. P. Balasubrahmanyam","Romantic","Kannada"],
+["Nanna Ninna Prema","Sonu Nigam","Romantic","Kannada"],
+["Nee Nanna Gellalare Title","S. Janaki","Romantic","Kannada"],
+["Arare Shuruvayitu Hege","Armaan Malik","Romantic","Kannada"],
+["Kaanada Kadalige","S. Janaki","Calm","Kannada"],
+["Naguva Nayana","S. P. Balasubrahmanyam","Romantic","Kannada"],
+["Hrudayada Thumbi","Sonu Nigam","Romantic","Kannada"],
+["Nanna Cheluve","Sonu Nigam","Romantic","Kannada"],
+["Mellage","Sonu Nigam","Calm","Kannada"],
+["Madhura Pisumaatige","Sonu Nigam","Romantic","Kannada"],
+["Onde Ondu Saari","Sonu Nigam","Romantic","Kannada"],
+["Ninna Sanihake","Sanjith Hegde","Romantic","Kannada"],
+["Kareyole","Vijay Prakash","Romantic","Kannada"],
+["Neenire Neenire","Sonu Nigam","Romantic","Kannada"],
+["Ninna Notavu","Sid Sriram","Romantic","Kannada"],
+["Tulasi","Kannada","Calm","Kannada"],
+["Masth Malaika","Kannada","Energetic","Kannada"],
+["Tabaahi","Vishal Mishra","Energetic","Kannada"],
+["KD Title Track","Armaan Malik","Energetic","Kannada"],
+["Radha Radha","Sid Sriram","Romantic","Kannada"],
+["Bum Chiki Bum","Kannada","Happy","Kannada"],
+["Ra Ga Sa Da Aa","Kannada","Energetic","Kannada"],
+["Yene Helu Kusuma","Kannada","Romantic","Kannada"],
+["Bangle Bangari","Kannada","Happy","Kannada"],
+["Naguvina Nesara","Kannada","Calm","Kannada"],
+["In The Night","Kannada","Chill","Kannada"],
+["Varnamaale","Kannada","Calm","Kannada"],
+["Ayyo Sivane","Kannada","Happy","Kannada"],
+["Madanaari","Kannada","Romantic","Kannada"],
+["Kabul Drakshi","Kannada","Chill","Kannada"],
+["Settagalla","Kannada","Happy","Kannada"],
+["Nannedeya Haadondanu","Kannada","Romantic","Kannada"],
+["Rangoli","Kannada","Happy","Kannada"],
+["Preethi Mundhe","Kannada","Romantic","Kannada"],
+["Kaarmoda Karagi","Kannada","Sad","Kannada"],
+["Hasravva","Kannada","Chill","Kannada"],
+["Summane Summane","Kannada","Calm","Kannada"],
+["Scooter Song","Kannada","Happy","Kannada"],
+["Nee Nanna","Kannada","Romantic","Kannada"],
+["Yenidu Maleyaagiro Haagide","Kannada","Romantic","Kannada"],
+["Manamohaka","Kannada","Romantic","Kannada"],
+["Kandamma Kandamma","Kannada","Happy","Kannada"],
+["Benki Song","Kannada","Energetic","Kannada"],
+["Kantara Varaha Roopam","Sai Vignesh","Energetic","Kannada"],
+["Singara Siriye","Vijay Prakash","Romantic","Kannada"],
+["Loka Sundari","Kannada","Happy","Kannada"],
+["Gombe Gombe","Sonu Nigam","Romantic","Kannada"],
+["Hrudayada Maathu","Sonu Nigam","Sad","Kannada"],
+["Ninna Gungalli","Sonu Nigam","Romantic","Kannada"],
+["Nee Nanna Olavu","Sonu Nigam","Romantic","Kannada"],
+["Preetham Gubbi","Kannada","Calm","Kannada"],
+["Nee Nanna Jeeva","Kannada","Romantic","Kannada"],
+["O Marave","Kannada","Calm","Kannada"],
+["Maleyali Jotheyali","Sonu Nigam","Romantic","Kannada"],
+["Nodivalandava","S. P. Balasubrahmanyam","Happy","Kannada"],
+["Kanasalu Nanasalu","Sonu Nigam","Romantic","Kannada"],
+["Ee Preethi Yeke Bhoomi Melide","Sonu Nigam","Romantic","Kannada"],
+["Preethse Antha Prana Tinnuve","Sonu Nigam","Sad","Kannada"],
+["Nanna Usire","Sonu Nigam","Sad","Kannada"],
+["Kariya I Love You","Kannada","Happy","Kannada"],
+["Jeeva Hoovagide Remix","Kannada","Chill","Kannada"],
+["Halli Haadu","Kannada","Happy","Kannada"],
+["College Days","Kannada","Happy","Kannada"],
+["College Papa Kannada","Kannada","Happy","Kannada"],
+["Local Loka","Kannada","Energetic","Kannada"],
+["Raambo 2 Title Track","Kannada","Happy","Kannada"],
+["Pataki Poriyo","Kannada","Energetic","Kannada"],
+["Pataki","Kannada","Energetic","Kannada"],
+["Pushpavati","Kannada","Happy","Kannada"],
+["Chuttu Chuttu Remix","Kannada","Energetic","Kannada"],
+["Dostha Kano","Kannada","Happy","Kannada"],
+["Yenagali Munde Saagu Nee","Kannada","Motivational","Kannada"],
+["Huttidare Kannada Nadalli","Kannada","Motivational","Kannada"],
+["Jogada Siri Belakinalli","Kannada","Calm","Kannada"],
+["Barisu Kannada Dindimava","Kannada","Motivational","Kannada"],
+["Hacchevu Kannada Da Deepa","Kannada","Motivational","Kannada"],
+["Kannadave Nammamma","Kannada","Calm","Kannada"],
+["Elladaru Iru Enthadaru Iru","Kannada","Motivational","Kannada"],
+["Endendu Ninnanu Maretu","Kannada","Sad","Kannada"],
+["Yaare Koogadali","Kannada","Motivational","Kannada"],
+["Aaha Mysooru","Kannada","Happy","Kannada"],
+["Mysore Mallige","Kannada","Calm","Kannada"],
+["Karunada Thayi Sada Chinmayi","Kannada","Motivational","Kannada"],
+["Kannada Naadina Jeevanadi","Kannada","Motivational","Kannada"],
+["Hacchevu Kannada Da Deepa","Kannada","Happy","Kannada"],
+["Nee Bandu Ninthaaga","Kannada","Romantic","Kannada"],
+["Ninna Kanda Kshanadinda","Kannada","Romantic","Kannada"],
+["Preethiya Hesare Neenu","Kannada","Romantic","Kannada"],
+["Usire Usire","Kannada","Sad","Kannada"],
+["Olavina Udugore","Kannada","Romantic","Kannada"],
+["Ninna Nodalentho","Kannada","Romantic","Kannada"],
+["Nanna Hrudaya","Kannada","Sad","Kannada"],
+["O Priya O Priya","Kannada","Romantic","Kannada"],
+["Preethse Preethse","Kannada","Romantic","Kannada"],
+["Nanna Thangi","Kannada","Calm","Kannada"],
+["Mungaru Maleye 2","Kannada","Romantic","Kannada"],
+["Koli Kooguthide","Kannada","Happy","Kannada"],
+["Cheluve Ondu Kelthini","Kannada","Romantic","Kannada"],
+["Jeeva Veene","Kannada","Calm","Kannada"],
+["Hoovina Baanadante","Kannada","Romantic","Kannada"],
+["Aakasha Neenadare","Kannada","Romantic","Kannada"],
+["O Malenaada","Kannada","Calm","Kannada"],
+["Ee Hrudaya","Kannada","Romantic","Kannada"],
+["Nanna Preethiya Rani","Kannada","Romantic","Kannada"],
+["Nee Irade","Kannada","Sad","Kannada"],
+["Ninna Preethiya","Kannada","Romantic","Kannada"],
+["Sone Sone","Kannada","Happy","Kannada"],
+["Dwapara","Kannada","Romantic","Kannada"],
+["Usire Usire 2","Kannada","Sad","Kannada"],
+["Kanasina Rani","Kannada","Romantic","Kannada"],
+["Nodutha Naliyutha","Kannada","Happy","Kannada"],
+["Preethi Geethi Ityadi","Kannada","Happy","Kannada"],
+["Love Me Again Kannada","Kannada","Romantic","Kannada"],
+["Hudugi Hudugi","Kannada","Happy","Kannada"],
+["Nee Sigovaregu Reprise","Kannada","Romantic","Kannada"],
+["Ondu Sari Helbidu","Kannada","Romantic","Kannada"],
+["Kanna Muche Kaade Goode","Kannada","Happy","Kannada"],
+["Hrudaya Hrudaya","Kannada","Romantic","Kannada"],
+["Ninna Kanna Notadalli","Kannada","Romantic","Kannada"],
+["Preethiya Loka","Kannada","Romantic","Kannada"],
+["Jotheyali Jothe Jotheyali","Kannada","Calm","Kannada"],
+["Madhura Madhura","Kannada","Romantic","Kannada"],
+["Nee Enage","Kannada","Romantic","Kannada"],
+["Ee Preethiya Charisma","Kannada","Happy","Kannada"],
+["Kanasugala Kanasugala","Kannada","Calm","Kannada"],
+["Nanna Cheluve","Kannada","Romantic","Kannada"],
+["Olave Mandhara","Kannada","Romantic","Kannada"],
+["Kannu Kannu","Kannada","Romantic","Kannada"],
+["Hrudaya Kadalina","Kannada","Calm","Kannada"],
+["Nanna Hrudayadalli","Kannada","Romantic","Kannada"],
+["Preethi Endarenu","Kannada","Romantic","Kannada"],
+["Ninna Cheluvina","Kannada","Romantic","Kannada"],
+["Nee Nanna Sangaathi","Kannada","Romantic","Kannada"],
+["Ondu Munjane","Kannada","Calm","Kannada"],
+["Ee Sundara Beladingala 2","Kannada","Calm","Kannada"],
+["Mouna Thaalithe","Kannada","Calm","Kannada"],
+["Male Baruva Haagide","Kannada","Calm","Kannada"],
+["Nanna Ninna Prema","Kannada","Romantic","Kannada"],
+["Preethiya Karedare","Kannada","Romantic","Kannada"],
+["Kanna Sanneyindalene","Kannada","Romantic","Kannada"],
+["Ninna Nodalentho","Kannada","Romantic","Kannada"],
+["Olavina Geleyane","Kannada","Romantic","Kannada"],
+["Hrudayake Hedarike Reprise","Kannada","Sad","Kannada"],
+["Marali Manasaagide Reprise","Kannada","Sad","Kannada"],
+["Marethuhoyithe Reprise","Kannada","Sad","Kannada"],
+["Kariya I Love You Remix","Kannada","Happy","Kannada"],
+["Appu","Kannada","Energetic","Kannada"],
+["Power Star","Kannada","Energetic","Kannada"],
+["Jackie Title Track","Kannada","Energetic","Kannada"],
+["Raajakumara Title Track","Kannada","Motivational","Kannada"],
+["Yuvarathnaa Title Track","Kannada","Motivational","Kannada"],
+["James Title Track","Kannada","Energetic","Kannada"],
+["Anjani Putra Title Track","Kannada","Energetic","Kannada"],
+["Ninnindale Title Track","Kannada","Romantic","Kannada"],
+["Googly Title Track","Kannada","Happy","Kannada"],
+["Mr and Mrs Ramachari Title Track","Kannada","Romantic","Kannada"],
+["Kirik Party Title Track","Kannada","Happy","Kannada"],
+["Dia Title Track","Kannada","Romantic","Kannada"],
+["Love Mocktail Title Track","Kannada","Romantic","Kannada"],
+["Gaalipata Title Track","Kannada","Happy","Kannada"],
+["Milana Title Track","Kannada","Romantic","Kannada"],
+["Paramathma Title Track","Kannada","Chill","Kannada"],
+["Simple Agi Ond Love Story","Kannada","Romantic","Kannada"],
+["Ulidavaru Kandanthe","Kannada","Chill","Kannada"],
+["RangiTaranga Title Track","Kannada","Chill","Kannada"],
+["Garuda Gamana Vrishabha Vahana","Kannada","Energetic","Kannada"],
+["Sapta Sagaradaache Ello Title Track","Kannada","Calm","Kannada"],
+["Kantara Title Track","Kannada","Energetic","Kannada"],
+["777 Charlie Title Track","Kannada","Happy","Kannada"],
+["Avane Srimannarayana Title Track","Kannada","Happy","Kannada"],
+["Kavaludaari Title Track","Kannada","Chill","Kannada"],
+["Bell Bottom Title Track","Kannada","Happy","Kannada"],
+["Operation Alamelamma","Kannada","Happy","Kannada"],
+["French Biryani Title Track","Kannada","Happy","Kannada"],
+["Garuda Gamana","Kannada","Calm","Kannada"],
+["Sapta Sagaradaache Ello Side A","Kannada","Sad","Kannada"],
+["Sapta Sagaradaache Ello Side B","Kannada","Romantic","Kannada"],
+["Kaatera Title Track","Kannada","Energetic","Kannada"],
+["Martin Title Track","Kannada","Energetic","Kannada"],
+["UI Title Track","Kannada","Energetic","Kannada"],
+["Toxic Title Track","Kannada","Energetic","Kannada"],
+["Jolly Title Track","Kannada","Happy","Kannada"],
+["Mother Promise","Kannada","Calm","Kannada"],
+["Brindhavihari Title Track","Kannada","Romantic","Kannada"],
+["Yuva Title Track","Kannada","Motivational","Kannada"],
+["KRGF Theme","Kannada","Energetic","Kannada"],
+["KGF Garbadhi","Kannada","Romantic","Kannada"],
 
-    {
-        title: "Anisuthide Yaako Indu",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
+/* =========================================================
+   HINDI — 50
+   ========================================================= */
 
-    {
-        title: "Jotheyali Jothe Jotheyali",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
+["Dildaara (Stand By Me)","Shafqat Amanat Ali","Romantic","Hindi"],
+["Tum Se Hi","Mohit Chauhan","Romantic","Hindi"],
+["Agar Tum Saath Ho","Alka Yagnik, Arijit Singh","Sad","Hindi"],
+["Channa Mereya","Arijit Singh","Sad","Hindi"],
+["Kesariya","Arijit Singh","Romantic","Hindi"],
+["Apna Bana Le","Arijit Singh","Romantic","Hindi"],
+["Tujh Mein Rab Dikhta Hai","Roop Kumar Rathod","Romantic","Hindi"],
+["Tum Hi Ho","Arijit Singh","Romantic","Hindi"],
+["Raabta","Arijit Singh","Romantic","Hindi"],
+["Phir Le Aaya Dil","Arijit Singh","Sad","Hindi"],
+["Iktara","Kavita Seth","Calm","Hindi"],
+["Ilahi","Arijit Singh","Happy","Hindi"],
+["Safarnama","Lucky Ali","Chill","Hindi"],
+["Khaabon Ke Parinday","Mohit Chauhan","Chill","Hindi"],
+["Zinda","Siddharth Mahadevan","Motivational","Hindi"],
+["Kar Har Maidaan Fateh","Sukhwinder Singh","Motivational","Hindi"],
+["Lakshya","Shankar Mahadevan","Motivational","Hindi"],
+["Apna Time Aayega","Ranveer Singh","Motivational","Hindi"],
+["Aashayein","KK","Motivational","Hindi"],
+["Love You Zindagi","Amit Trivedi","Happy","Hindi"],
+["Gallan Goodiyaan","Yashita Sharma","Happy","Hindi"],
+["Badtameez Dil","Benny Dayal","Happy","Hindi"],
+["London Thumakda","Labh Janjua","Happy","Hindi"],
+["Ullu Ka Pattha","Arijit Singh","Energetic","Hindi"],
+["Nashe Si Chadh Gayi","Arijit Singh","Happy","Hindi"],
+["Kala Chashma","Amar Arshi","Energetic","Hindi"],
+["Jaiye Sajana","Hindi","Romantic","Hindi"],
+["Tu Hi Disda","Hindi","Romantic","Hindi"],
+["Ram Ji Aake Bhala Karenge","Hindi","Calm","Hindi"],
+["Ek Din Title Track","Hindi","Motivational","Hindi"],
+["Tu Meri Main Tera Main Tera Tu Meri","Hindi","Romantic","Hindi"],
+["Dil Dil Dil","Hindi","Happy","Hindi"],
+["Dilbar Ki Aankhon Ka","Hindi","Romantic","Hindi"],
+["Bijuria","Hindi","Energetic","Hindi"],
+["Tabaahi Hindi","Hindi","Energetic","Hindi"],
+["Heeriye","Jasleen Royal","Romantic","Hindi"],
+["O Maahi","Arijit Singh","Romantic","Hindi"],
+["Satranga","Arijit Singh","Sad","Hindi"],
+["Ve Kamleya","Arijit Singh","Romantic","Hindi"],
+["Tere Vaaste","Varun Jain","Romantic","Hindi"],
+["Chaleya","Arijit Singh","Romantic","Hindi"],
+["Heer Ranjha","Rito Riba","Sad","Hindi"],
+["Maan Meri Jaan","King","Romantic","Hindi"],
+["Husn","Anuv Jain","Romantic","Hindi"],
+["Jo Tum Mere Ho","Anuv Jain","Romantic","Hindi"],
+["Kho Gaye Hum Kahan","Jasleen Royal","Chill","Hindi"],
+["O Bedardeya","Arijit Singh","Sad","Hindi"],
+["Sajni","Arijit Singh","Romantic","Hindi"],
+["Ve Haaniyaan","Avvy Sra","Romantic","Hindi"],
+["Aaj Ki Raat","Madhubanti Bagchi","Energetic","Hindi"],
+["Ami Je Tomar","Shreya Ghoshal","Calm","Hindi"],
 
-    {
-        title: "Minchagi Neenu Baralu",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
+/* =========================================================
+   TAMIL — 50
+   ========================================================= */
 
-    {
-        title: "Ninnindale",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
+["Aasa Kooda","Sai Abhyankkar","Happy","Tamil"],
+["Pavazha Malli","Tamil","Romantic","Tamil"],
+["Radhimaa","Tamil","Romantic","Tamil"],
+["Monica","Tamil","Energetic","Tamil"],
+["Karuppa Kooda Va","Tamil","Energetic","Tamil"],
+["Nallaru Po","Tamil","Happy","Tamil"],
+["Hangova","Tamil","Chill","Tamil"],
+["Vaama Vaama","Tamil","Happy","Tamil"],
+["Bum Baa Diga Diga","Tamil","Energetic","Tamil"],
+["Ala Bolelo","Tamil","Happy","Tamil"],
+["Alaakaa Loova","Tamil","Romantic","Tamil"],
+["The Wedding Song","Tamil","Happy","Tamil"],
+["Pattampoochi","Tamil","Calm","Tamil"],
+["Goindhamma","Tamil","Energetic","Tamil"],
+["Aura 10/10","Tamil","Energetic","Tamil"],
+["God Mode","Tamil","Energetic","Tamil"],
+["Kattazhagi","Tamil","Romantic","Tamil"],
+["Raga of Revenge","Tamil","Energetic","Tamil"],
+["Oorum Blood","Tamil","Energetic","Tamil"],
+["Arabic Kuthu","Anirudh Ravichander","Energetic","Tamil"],
+["Why This Kolaveri Di","Dhanush","Happy","Tamil"],
+["Megham Karukatha","Dhanush","Romantic","Tamil"],
+["Kaavaalaa","Shilpa Rao","Energetic","Tamil"],
+["Hukum","Anirudh Ravichander","Energetic","Tamil"],
+["Naa Ready","Vijay","Energetic","Tamil"],
+["Badass","Anirudh Ravichander","Energetic","Tamil"],
+["Jimikki Ponnu","Anirudh Ravichander","Happy","Tamil"],
+["Chellamma","Anirudh Ravichander","Happy","Tamil"],
+["Selfie Pulla","Vijay","Happy","Tamil"],
+["Vaathi Coming","Anirudh Ravichander","Energetic","Tamil"],
+["Enjoy Enjaami","Dhee","Chill","Tamil"],
+["Rowdy Baby","Dhanush","Happy","Tamil"],
+["Marana Mass","Anirudh Ravichander","Energetic","Tamil"],
+["Kutty Story","Vijay","Chill","Tamil"],
+["Katchi Sera","Sai Abhyankkar","Romantic","Tamil"],
+["Achacho","Tamil","Happy","Tamil"],
+["Vazhithunaiye","Tamil","Romantic","Tamil"],
+["Nenjame Nenjame","A.R. Rahman","Calm","Tamil"],
+["Munbe Vaa","Shreya Ghoshal","Romantic","Tamil"],
+["Vaseegara","Bombay Jayashri","Romantic","Tamil"],
+["New York Nagaram","A.R. Rahman","Sad","Tamil"],
+["Hosanna","Vijay Prakash","Romantic","Tamil"],
+["Thalli Pogathey","A.R. Rahman","Romantic","Tamil"],
+["Mental Manadhil","A.R. Rahman","Chill","Tamil"],
+["Aaromale","A.R. Rahman","Calm","Tamil"],
+["Kadhal Sadugudu","S.P. Charan","Happy","Tamil"],
+["Anbil Avan","Devan Ekambaram","Romantic","Tamil"],
+["Oh Penne","Anirudh Ravichander","Romantic","Tamil"],
+["Meesaya Murukku","Hiphop Tamizha","Energetic","Tamil"],
+["Vaadi Pulla Vaadi","Hiphop Tamizha","Happy","Tamil"],
 
-    {
-        title: "Kaanada Kadalige",
-        language: "Kannada",
-        mood: "Calm",
-        videoId: ""
-    },
+/* =========================================================
+   TELUGU — 50
+   ========================================================= */
 
-    {
-        title: "Naguva Nayana",
-        language: "Kannada",
-        mood: "Calm",
-        videoId: ""
-    },
+["Irumudi Kattu","Telugu","Energetic","Telugu"],
+["Aaya Sher","Telugu","Energetic","Telugu"],
+["Hellallallo","Telugu","Happy","Telugu"],
+["Rai Rai Raa Raa","Telugu","Energetic","Telugu"],
+["Thippukuntannav","Telugu","Happy","Telugu"],
+["Chikiri Chikiri","Telugu","Happy","Telugu"],
+["Peelings","Telugu","Energetic","Telugu"],
+["Chuttamalle","Shilpa Rao","Romantic","Telugu"],
+["Gira Gira Gingiraagirey","Telugu","Happy","Telugu"],
+["College Papa","Bheems Ceciroleo","Happy","Telugu"],
+["Yeshanagula","Telugu","Calm","Telugu"],
+["Mallepoola Pallaki","Telugu","Romantic","Telugu"],
+["Thassadiya","Telugu","Energetic","Telugu"],
+["Neno Butterfly","Telugu","Happy","Telugu"],
+["Hoyila Hoyila","Telugu","Happy","Telugu"],
+["Dheema","Telugu","Romantic","Telugu"],
+["Samajavaragamana","Sid Sriram","Romantic","Telugu"],
+["Inkem Inkem Inkem Kaavaale","Sid Sriram","Romantic","Telugu"],
+["Butta Bomma","Armaan Malik","Happy","Telugu"],
+["Ramuloo Ramulaa","Anurag Kulkarni","Energetic","Telugu"],
+["Oo Antava Oo Oo Antava","Indravathi Chauhan","Energetic","Telugu"],
+["Srivalli","Sid Sriram","Romantic","Telugu"],
+["Daakko Daakko Meka","Shankar Mahadevan","Energetic","Telugu"],
+["Saami Saami","Mounika Yadav","Energetic","Telugu"],
+["Naatu Naatu","Rahul Sipligunj","Energetic","Telugu"],
+["Komuram Bheemudo","Kaala Bhairava","Motivational","Telugu"],
+["Dosti","Hemachandra","Motivational","Telugu"],
+["Neetho Unte Chalu","Mohana Bhogaraju","Romantic","Telugu"],
+["Oh Sita Hey Rama","Vishal Chandrashekhar","Romantic","Telugu"],
+["Inthandham","SPB Charan","Romantic","Telugu"],
+["Kadalalle","Sid Sriram","Romantic","Telugu"],
+["Adiga Adiga","Sid Sriram","Sad","Telugu"],
+["Vellipomaakey","Sid Sriram","Sad","Telugu"],
+["Pacha Bottesina","Karthik","Romantic","Telugu"],
+["Yemito","Haricharan","Romantic","Telugu"],
+["Pranavalaya","Anurag Kulkarni","Calm","Telugu"],
+["Na Roja Nuvve","Hesham Abdul Wahab","Romantic","Telugu"],
+["Aradhya","Sid Sriram","Romantic","Telugu"],
+["Kushi Title Song","Hesham Abdul Wahab","Romantic","Telugu"],
+["O Rendu Prema Meghaalila","Vijai Bulganin","Romantic","Telugu"],
+["Oh My Baby","Shilpa Rao","Happy","Telugu"],
+["Kalaavathi","Sid Sriram","Romantic","Telugu"],
+["Mind Block","Blaaze","Energetic","Telugu"],
+["Top Lesi Poddi","Sagar","Energetic","Telugu"],
+["Ringa Ringa","Priya Hemesh","Energetic","Telugu"],
+["Pakka Local","Geetha Madhuri","Energetic","Telugu"],
+["Blockbuster","Shreya Ghoshal","Happy","Telugu"],
+["Seeti Maar","Jaspreet Jasz","Energetic","Telugu"],
+["Mind Block Mass","Telugu","Energetic","Telugu"],
+["Pushpa Pushpa","Telugu","Energetic","Telugu"],
 
-    {
-        title: "Nooru Janmaku",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
+/* =========================================================
+   ENGLISH — 30
+   ========================================================= */
 
-    {
-        title: "Nee Nanna Gellalare",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Omme Ninnannu",
-        language: "Kannada",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-
-    /* =========================
-       HINDI
-    ========================= */
-
-    {
-        title: "Tum Hi Ho",
-        language: "Hindi",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Agar Tum Saath Ho",
-        language: "Hindi",
-        mood: "Sad",
-        videoId: ""
-    },
-
-    {
-        title: "Ilahi",
-        language: "Hindi",
-        mood: "Happy",
-        videoId: ""
-    },
-
-    {
-        title: "Zinda",
-        language: "Hindi",
-        mood: "Motivational",
-        videoId: ""
-    },
-
-    {
-        title: "Kar Har Maidaan Fateh",
-        language: "Hindi",
-        mood: "Motivational",
-        videoId: ""
-    },
-
-    {
-        title: "Apna Bana Le",
-        language: "Hindi",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Kesariya",
-        language: "Hindi",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Chaleya",
-        language: "Hindi",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Heeriye",
-        language: "Hindi",
-        mood: "Chill",
-        videoId: ""
-    },
-
-    {
-        title: "Dildaara",
-        language: "Hindi",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-
-    /* =========================
-       TAMIL
-    ========================= */
-
-    {
-        title: "Munbe Vaa",
-        language: "Tamil",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Vaseegara",
-        language: "Tamil",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "New York Nagaram",
-        language: "Tamil",
-        mood: "Sad",
-        videoId: ""
-    },
-
-    {
-        title: "Why This Kolaveri Di",
-        language: "Tamil",
-        mood: "Happy",
-        videoId: ""
-    },
-
-    {
-        title: "Vaathi Coming",
-        language: "Tamil",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Arabic Kuthu",
-        language: "Tamil",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Megham Karukatha",
-        language: "Tamil",
-        mood: "Chill",
-        videoId: ""
-    },
-
-    {
-        title: "Nenjukkul Peidhidum",
-        language: "Tamil",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Rowdy Baby",
-        language: "Tamil",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Enjoy Enjaami",
-        language: "Tamil",
-        mood: "Happy",
-        videoId: ""
-    },
-
-
-    /* =========================
-       TELUGU
-    ========================= */
-
-    {
-        title: "Inkem Inkem Inkem Kaavaale",
-        language: "Telugu",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Samajavaragamana",
-        language: "Telugu",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Butta Bomma",
-        language: "Telugu",
-        mood: "Happy",
-        videoId: ""
-    },
-
-    {
-        title: "Srivalli",
-        language: "Telugu",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Oo Antava Oo Oo Antava",
-        language: "Telugu",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Ramuloo Ramulaa",
-        language: "Telugu",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Vachindamma",
-        language: "Telugu",
-        mood: "Happy",
-        videoId: ""
-    },
-
-    {
-        title: "Maate Vinadhuga",
-        language: "Telugu",
-        mood: "Chill",
-        videoId: ""
-    },
-
-    {
-        title: "Inthandham",
-        language: "Telugu",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Adiga Adiga",
-        language: "Telugu",
-        mood: "Sad",
-        videoId: ""
-    },
-
-
-    /* =========================
-       ENGLISH
-    ========================= */
-
-    {
-        title: "Perfect",
-        language: "English",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Shape of You",
-        language: "English",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Believer",
-        language: "English",
-        mood: "Motivational",
-        videoId: ""
-    },
-
-    {
-        title: "Counting Stars",
-        language: "English",
-        mood: "Motivational",
-        videoId: ""
-    },
-
-    {
-        title: "Let Her Go",
-        language: "English",
-        mood: "Sad",
-        videoId: ""
-    },
-
-    {
-        title: "Someone You Loved",
-        language: "English",
-        mood: "Sad",
-        videoId: ""
-    },
-
-    {
-        title: "Until I Found You",
-        language: "English",
-        mood: "Romantic",
-        videoId: ""
-    },
-
-    {
-        title: "Golden Hour",
-        language: "English",
-        mood: "Chill",
-        videoId: ""
-    },
-
-    {
-        title: "Sao Paulo",
-        language: "English",
-        mood: "Energetic",
-        videoId: ""
-    },
-
-    {
-        title: "Blinding Lights",
-        language: "English",
-        mood: "Energetic",
-        videoId: ""
-    }
+["Blinding Lights","The Weeknd","Energetic","English"],
+["Save Your Tears","The Weeknd","Sad","English"],
+["Starboy","The Weeknd","Energetic","English"],
+["Die For You","The Weeknd","Romantic","English"],
+["Call Out My Name","The Weeknd","Sad","English"],
+["Dancing in the Flames","The Weeknd","Energetic","English"],
+["Open Hearts","The Weeknd","Romantic","English"],
+["Cry For Me","The Weeknd","Sad","English"],
+["São Paulo","The Weeknd","Energetic","English"],
+["Timeless","The Weeknd","Chill","English"],
+["Popular","The Weeknd","Chill","English"],
+["One Of The Girls","The Weeknd","Romantic","English"],
+["Moth To A Flame","The Weeknd","Romantic","English"],
+["Die For You Remix","The Weeknd","Romantic","English"],
+["Timeless Remix","The Weeknd","Chill","English"],
+["As It Was","Harry Styles","Chill","English"],
+["Perfect","Ed Sheeran","Romantic","English"],
+["Photograph","Ed Sheeran","Romantic","English"],
+["Shape of You","Ed Sheeran","Happy","English"],
+["Happier","Marshmello","Sad","English"],
+["Stay","The Kid LAROI","Energetic","English"],
+["Believer","Imagine Dragons","Motivational","English"],
+["Thunder","Imagine Dragons","Energetic","English"],
+["Demons","Imagine Dragons","Sad","English"],
+["Whatever It Takes","Imagine Dragons","Motivational","English"],
+["Counting Stars","OneRepublic","Motivational","English"],
+["I Ain't Worried","OneRepublic","Happy","English"],
+["Daylight","David Kushner","Sad","English"],
+["Until I Found You","Stephen Sanchez","Romantic","English"],
+["Golden Hour","JVKE","Romantic","English"]
 
 ];
 
 
-/* ---------------------------------------------------------
+/* =========================================================
+   CONVERT DATABASE
+   ========================================================= */
+
+const musicDatabase = songs.map((song, index) => ({
+  id: index + 1,
+  title: song[0],
+  artist: song[1],
+  mood: song[2],
+  language: song[3],
+
+  /*
+   * IMPORTANT:
+   * Real YouTube IDs will be added after verification.
+   * Never invent these IDs.
+   */
+  videoId: ""
+}));
+
+
+/* =========================================================
+   APP STATE
+   ========================================================= */
+
+let selectedLanguage = "Kannada";
+let selectedMood = "Happy";
+
+let currentSongs = [];
+let currentIndex = -1;
+
+let favorites =
+  JSON.parse(localStorage.getItem("moodifyFavorites")) || [];
+
+let darkMode =
+  localStorage.getItem("moodifyDarkMode") === "true";
+
+let ytPlayer = null;
+let youtubeReady = false;
+
+
+/* =========================================================
    DOM
---------------------------------------------------------- */
+   ========================================================= */
 
 const languageButtons =
-    document.querySelectorAll(".language-btn");
+  document.querySelectorAll(".language-btn");
 
 const moodButtons =
-    document.querySelectorAll(".mood-btn");
+  document.querySelectorAll(".mood-btn");
 
 const findMusicBtn =
-    document.getElementById("findMusicBtn");
+  document.getElementById("findMusicBtn");
 
-const songsContainer =
-    document.getElementById("songsContainer");
+const songContainer =
+  document.getElementById("songContainer");
 
-const resultTitle =
-    document.getElementById("resultTitle");
+const resultsTitle =
+  document.getElementById("resultsTitle");
 
-const songCount =
-    document.getElementById("songCount");
+const resultsCount =
+  document.getElementById("resultsCount");
 
-const themeBtn =
-    document.getElementById("themeBtn");
+const playerSection =
+  document.getElementById("playerSection");
 
 const playerSongTitle =
-    document.getElementById("playerSongTitle");
+  document.getElementById("playerSongTitle");
 
 const playerSongArtist =
-    document.getElementById("playerSongArtist");
-
-const playerStatus =
-    document.getElementById("playerStatus");
-
-const playPauseBtn =
-    document.getElementById("playPauseBtn");
-
-const previousBtn =
-    document.getElementById("previousBtn");
-
-const nextBtn =
-    document.getElementById("nextBtn");
+  document.getElementById("playerSongArtist");
 
 const playerFavoriteBtn =
-    document.getElementById("playerFavoriteBtn");
+  document.getElementById("playerFavoriteBtn");
+
+const playerStatus =
+  document.getElementById("playerStatus");
+
+const playerPlaceholder =
+  document.getElementById("playerPlaceholder");
 
 const favoritesContainer =
-    document.getElementById("favoritesContainer");
+  document.getElementById("favoritesContainer");
+
+const playBtn =
+  document.getElementById("playBtn");
+
+const prevBtn =
+  document.getElementById("prevBtn");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const themeBtn =
+  document.getElementById("themeBtn");
 
 
-/* ---------------------------------------------------------
-   LANGUAGE SELECTION
---------------------------------------------------------- */
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function applyTheme() {
+
+  if (darkMode) {
+    document.body.classList.add("dark");
+
+    if (themeBtn) {
+      themeBtn.textContent = "☀️";
+    }
+
+  } else {
+
+    document.body.classList.remove("dark");
+
+    if (themeBtn) {
+      themeBtn.textContent = "🌙";
+    }
+  }
+}
+
+
+applyTheme();
+
+
+if (themeBtn) {
+
+  themeBtn.addEventListener("click", () => {
+
+    darkMode = !darkMode;
+
+    localStorage.setItem(
+      "moodifyDarkMode",
+      darkMode
+    );
+
+    applyTheme();
+  });
+}
+
+
+/* =========================================================
+   LANGUAGE BUTTONS
+   ========================================================= */
 
 languageButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+  button.addEventListener("click", () => {
 
-        languageButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
+    languageButtons.forEach(btn =>
+      btn.classList.remove("active")
+    );
 
-        button.classList.add("active");
+    button.classList.add("active");
 
-        selectedLanguage =
-            button.dataset.language;
+    selectedLanguage =
+      button.dataset.language;
 
-        renderSongs();
-
-    });
+    resultsTitle.textContent =
+      `${selectedLanguage} • ${selectedMood}`;
+  });
 
 });
 
 
-/* ---------------------------------------------------------
-   MOOD SELECTION
---------------------------------------------------------- */
+/* =========================================================
+   MOOD BUTTONS
+   ========================================================= */
 
 moodButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+  button.addEventListener("click", () => {
 
-        moodButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
+    moodButtons.forEach(btn =>
+      btn.classList.remove("active")
+    );
 
-        button.classList.add("active");
+    button.classList.add("active");
 
-        selectedMood =
-            button.dataset.mood;
+    selectedMood =
+      button.dataset.mood;
 
-        renderSongs();
-
-    });
+    resultsTitle.textContent =
+      `${selectedLanguage} • ${selectedMood}`;
+  });
 
 });
 
 
-/* ---------------------------------------------------------
+/* =========================================================
+   FIND MUSIC
+   ========================================================= */
+
+if (findMusicBtn) {
+
+  findMusicBtn.addEventListener("click", () => {
+
+    renderSongs();
+
+    document
+      .getElementById("resultsSection")
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+  });
+}
+
+
+/* =========================================================
    FILTER SONGS
---------------------------------------------------------- */
+   ========================================================= */
 
 function getFilteredSongs() {
 
-    return songs.filter(song =>
+  return musicDatabase.filter(song =>
 
-        song.language === selectedLanguage &&
+    song.language === selectedLanguage &&
+    song.mood === selectedMood
 
-        song.mood === selectedMood
-
-    );
-
+  );
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    RENDER SONGS
---------------------------------------------------------- */
+   ========================================================= */
 
 function renderSongs() {
 
-    currentSongs =
-        getFilteredSongs();
+  currentSongs = getFilteredSongs();
 
-    resultTitle.textContent =
-        `${selectedLanguage} • ${selectedMood}`;
+  currentIndex = -1;
 
-    songCount.textContent =
-        currentSongs.length;
+  songContainer.innerHTML = "";
 
-    songsContainer.innerHTML = "";
+  resultsTitle.textContent =
+    `${selectedLanguage} • ${selectedMood}`;
 
+  resultsCount.textContent =
+    `${currentSongs.length} songs selected for your mood`;
 
-    if (currentSongs.length === 0) {
+  if (currentSongs.length === 0) {
 
-        songsContainer.innerHTML = `
+    songContainer.innerHTML = `
+      <div class="empty-favorites">
+        <div>🎵</div>
+        <p>No songs found for this combination yet.</p>
+      </div>
+    `;
 
-            <div class="empty-favorites">
+    return;
+  }
 
-                🎵
 
-                <p>
-                    More songs coming soon for this mood.
-                </p>
+  currentSongs.forEach((song, index) => {
 
-            </div>
+    const card =
+      document.createElement("article");
 
-        `;
+    card.className = "song-card";
 
-        return;
+    const isFavorite =
+      favorites.includes(song.id);
 
-    }
 
+    card.innerHTML = `
 
-    currentSongs.forEach((song, index) => {
+      <div class="song-number">
+        #${index + 1}
+      </div>
 
-        const card =
-            document.createElement("div");
+      <h3>
+        ${escapeHTML(song.title)}
+      </h3>
 
-        card.className =
-            "song-card";
+      <p>
+        ${escapeHTML(song.artist)}
+      </p>
 
+      <span class="song-language">
+        ${languageEmoji(song.language)}
+        ${song.language}
+      </span>
 
-        const favorite =
-            isFavorite(song);
+      <button
+        class="favorite-btn ${isFavorite ? "active" : ""}"
+        aria-label="Favorite"
+        data-id="${song.id}">
+        ${isFavorite ? "♥" : "♡"}
+      </button>
 
-
-        card.innerHTML = `
-
-            <div class="song-number">
-                ${index + 1}
-            </div>
-
-            <div class="song-icon">
-                🎵
-            </div>
-
-            <div class="song-details">
-
-                <h3>
-                    ${escapeHTML(song.title)}
-                </h3>
-
-                <p>
-                    ${song.language} • ${song.mood}
-                </p>
-
-            </div>
-
-            <button
-                class="favorite-btn
-                ${favorite ? "active" : ""}"
-                aria-label="Favorite">
-
-                ${favorite ? "♥" : "♡"}
-
-            </button>
-
-        `;
-
-
-        /* CARD PLAY */
-
-        card.addEventListener("click", event => {
-
-            if (
-                event.target.closest(".favorite-btn")
-            ) {
-                return;
-            }
-
-            playSong(index);
-
-        });
-
-
-        /* FAVORITE */
-
-        const favoriteBtn =
-            card.querySelector(".favorite-btn");
-
-
-        favoriteBtn.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                toggleFavorite(song);
-
-                renderSongs();
-
-                renderFavorites();
-
-                if (
-                    currentSong &&
-                    currentSong.title === song.title
-                ) {
-
-                    updatePlayerFavorite();
-
-                }
-
-            }
-        );
-
-
-        songsContainer.appendChild(card);
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   PLAYER
---------------------------------------------------------- */
-
-function playSong(index) {
-
-    if (
-        index < 0 ||
-        index >= currentSongs.length
-    ) {
-        return;
-    }
-
-
-    currentSongIndex = index;
-
-    currentSong =
-        currentSongs[index];
-
-
-    playerSongTitle.textContent =
-        currentSong.title;
-
-
-    playerSongArtist.textContent =
-        `${currentSong.language} • ${currentSong.mood}`;
-
-
-    updatePlayerFavorite();
+    `;
 
 
     /*
-       VIDEO ID WILL BE CONNECTED
-       AFTER VERIFIED IDs ARE ADDED.
-    */
+     * SONG CARD ITSELF PLAYS THE SONG
+     */
 
-    if (
-        currentSong.videoId &&
-        playerReady
-    ) {
+    card.addEventListener("click", event => {
 
-        player.loadVideoById(
-            currentSong.videoId
-        );
-
-        playerStatus.textContent =
-            "Playing";
-
-        playPauseBtn.textContent =
-            "❚❚";
-
-    } else {
-
-        playerStatus.textContent =
-            "Video connection coming next";
-
-        playPauseBtn.textContent =
-            "▶";
-
-    }
-
-
-    document
-        .getElementById("musicPlayer")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-}
-
-
-/* ---------------------------------------------------------
-   PREVIOUS
---------------------------------------------------------- */
-
-previousBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!currentSongs.length) {
-            return;
-        }
-
-
-        let index =
-            currentSongIndex - 1;
-
-
-        if (index < 0) {
-
-            index =
-                currentSongs.length - 1;
-
-        }
-
-
-        playSong(index);
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   NEXT
---------------------------------------------------------- */
-
-nextBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!currentSongs.length) {
-            return;
-        }
-
-
-        let index =
-            currentSongIndex + 1;
-
-
-        if (
-            index >= currentSongs.length
-        ) {
-
-            index = 0;
-
-        }
-
-
-        playSong(index);
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   PLAY / PAUSE
---------------------------------------------------------- */
-
-playPauseBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!playerReady) {
-
-            playerStatus.textContent =
-                "Select a connected song first.";
-
-            return;
-
-        }
-
-
-        if (!currentSong) {
-
-            playerStatus.textContent =
-                "Tap a song first.";
-
-            return;
-
-        }
-
-
-        const state =
-            player.getPlayerState();
-
-
-        if (
-            state === YT.PlayerState.PLAYING
-        ) {
-
-            player.pauseVideo();
-
-        } else {
-
-            player.playVideo();
-
-        }
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   YOUTUBE API
---------------------------------------------------------- */
-
-function onYouTubeIframeAPIReady() {
-
-    player =
-        new YT.Player(
-            "youtubePlayer",
-            {
-
-                height: "100%",
-
-                width: "100%",
-
-                videoId: "",
-
-                playerVars: {
-
-                    playsinline: 1,
-
-                    controls: 1,
-
-                    rel: 0
-
-                },
-
-                events: {
-
-                    onReady:
-                        onPlayerReady,
-
-                    onStateChange:
-                        onPlayerStateChange,
-
-                    onAutoplayBlocked:
-                        onAutoplayBlocked
-
-                }
-
-            }
-        );
-
-}
-
-
-function onPlayerReady() {
-
-    playerReady = true;
-
-    playerStatus.textContent =
-        "Player ready";
-
-}
-
-
-function onPlayerStateChange(event) {
-
-    if (
-        event.data ===
-        YT.PlayerState.PLAYING
-    ) {
-
-        playPauseBtn.textContent =
-            "❚❚";
-
-        playerStatus.textContent =
-            "Playing";
-
-    }
-
-
-    if (
-        event.data ===
-        YT.PlayerState.PAUSED
-    ) {
-
-        playPauseBtn.textContent =
-            "▶";
-
-        playerStatus.textContent =
-            "Paused";
-
-    }
-
-
-    if (
-        event.data ===
-        YT.PlayerState.ENDED
-    ) {
-
-        playPauseBtn.textContent =
-            "▶";
-
-        playerStatus.textContent =
-            "Finished";
-
-        nextSong();
-
-    }
-
-}
-
-
-function onAutoplayBlocked() {
-
-    playerStatus.textContent =
-        "Tap play to start the song";
-
-}
-
-
-/* ---------------------------------------------------------
-   NEXT SONG AFTER FINISH
---------------------------------------------------------- */
-
-function nextSong() {
-
-    if (!currentSongs.length) {
+      if (
+        event.target.closest(".favorite-btn")
+      ) {
         return;
-    }
+      }
+
+      playSong(index);
+    });
 
 
-    let index =
-        currentSongIndex + 1;
+    const favoriteButton =
+      card.querySelector(".favorite-btn");
 
 
-    if (
-        index >= currentSongs.length
-    ) {
+    favoriteButton.addEventListener(
+      "click",
+      event => {
 
-        index = 0;
+        event.stopPropagation();
 
-    }
-
-
-    playSong(index);
-
-}
-
-
-/* ---------------------------------------------------------
-   FAVORITES
---------------------------------------------------------- */
-
-function getFavorites() {
-
-    try {
-
-        return JSON.parse(
-            localStorage.getItem(
-                "moodifyFavorites"
-            )
-        ) || [];
-
-    } catch {
-
-        return [];
-
-    }
-
-}
-
-
-function saveFavorites(favorites) {
-
-    localStorage.setItem(
-        "moodifyFavorites",
-        JSON.stringify(favorites)
-    );
-
-}
-
-
-function isFavorite(song) {
-
-    return getFavorites().some(
-        item =>
-            item.title === song.title &&
-            item.language === song.language
-    );
-
-}
-
-
-function toggleFavorite(song) {
-
-    let favorites =
-        getFavorites();
-
-
-    const exists =
-        favorites.findIndex(
-            item =>
-                item.title === song.title &&
-                item.language === song.language
-        );
-
-
-    if (exists >= 0) {
-
-        favorites.splice(
-            exists,
-            1
-        );
-
-    } else {
-
-        favorites.push(song);
-
-    }
-
-
-    saveFavorites(favorites);
-
-}
-
-
-/* ---------------------------------------------------------
-   PLAYER FAVORITE
---------------------------------------------------------- */
-
-playerFavoriteBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!currentSong) {
-            return;
-        }
-
-
-        toggleFavorite(currentSong);
-
-        updatePlayerFavorite();
-
-        renderFavorites();
+        toggleFavorite(song.id);
 
         renderSongs();
+      }
+    );
 
+
+    songContainer.appendChild(card);
+
+  });
+}
+
+
+/* =========================================================
+   PLAY SONG
+   ========================================================= */
+
+function playSong(index) {
+
+  if (
+    index < 0 ||
+    index >= currentSongs.length
+  ) {
+    return;
+  }
+
+  currentIndex = index;
+
+  const song =
+    currentSongs[currentIndex];
+
+
+  playerSongTitle.textContent =
+    song.title;
+
+  playerSongArtist.textContent =
+    `${song.artist} • ${song.language}`;
+
+
+  updatePlayerFavorite();
+
+
+  if (!song.videoId) {
+
+    playerPlaceholder.style.display =
+      "flex";
+
+    playerStatus.textContent =
+      "🎵 Song selected • verified playback ID pending";
+
+    playBtn.textContent = "▶";
+
+    playerSection.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    return;
+  }
+
+
+  playerPlaceholder.style.display =
+    "none";
+
+
+  if (youtubeReady && ytPlayer) {
+
+    ytPlayer.loadVideoById(
+      song.videoId
+    );
+
+    playBtn.textContent = "⏸";
+
+    playerStatus.textContent =
+      "▶ Playing";
+
+  } else {
+
+    playerStatus.textContent =
+      "Loading player…";
+  }
+
+
+  playerSection.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+/* =========================================================
+   PREVIOUS
+   ========================================================= */
+
+if (prevBtn) {
+
+  prevBtn.addEventListener("click", () => {
+
+    if (!currentSongs.length) return;
+
+    let index =
+      currentIndex - 1;
+
+    if (index < 0) {
+      index =
+        currentSongs.length - 1;
     }
-);
+
+    playSong(index);
+  });
+}
+
+
+/* =========================================================
+   NEXT
+   ========================================================= */
+
+if (nextBtn) {
+
+  nextBtn.addEventListener("click", () => {
+
+    if (!currentSongs.length) return;
+
+    let index =
+      currentIndex + 1;
+
+    if (
+      index >= currentSongs.length
+    ) {
+      index = 0;
+    }
+
+    playSong(index);
+  });
+}
+
+
+/* =========================================================
+   PLAY / PAUSE
+   ========================================================= */
+
+if (playBtn) {
+
+  playBtn.addEventListener("click", () => {
+
+    if (
+      currentIndex === -1 ||
+      !currentSongs.length
+    ) {
+
+      if (currentSongs.length) {
+        playSong(0);
+      }
+
+      return;
+    }
+
+
+    const song =
+      currentSongs[currentIndex];
+
+
+    if (!song.videoId) {
+
+      playerStatus.textContent =
+        "🎵 Playback ID is being prepared for this song.";
+
+      return;
+    }
+
+
+    if (!youtubeReady || !ytPlayer) {
+      return;
+    }
+
+
+    const state =
+      ytPlayer.getPlayerState();
+
+
+    if (state === 1) {
+
+      ytPlayer.pauseVideo();
+
+      playBtn.textContent = "▶";
+
+      playerStatus.textContent =
+        "Paused";
+
+    } else {
+
+      ytPlayer.playVideo();
+
+      playBtn.textContent = "⏸";
+
+      playerStatus.textContent =
+        "▶ Playing";
+    }
+
+  });
+}
+
+
+/* =========================================================
+   YOUTUBE IFRAME API
+   ========================================================= */
+
+window.onYouTubeIframeAPIReady =
+function () {
+
+  youtubeReady = true;
+
+  ytPlayer =
+    new YT.Player(
+      "youtubePlayer",
+      {
+
+        width: "100%",
+        height: "100%",
+
+        videoId: "",
+
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          rel: 0,
+          modestbranding: 1
+        },
+
+        events: {
+
+          onReady: () => {
+
+            playerStatus.textContent =
+              "Ready to play";
+
+          },
+
+          onStateChange: event => {
+
+            if (
+              event.data ===
+              YT.PlayerState.PLAYING
+            ) {
+
+              playBtn.textContent =
+                "⏸";
+
+              playerStatus.textContent =
+                "▶ Playing";
+
+            }
+
+
+            if (
+              event.data ===
+              YT.PlayerState.PAUSED
+            ) {
+
+              playBtn.textContent =
+                "▶";
+
+              playerStatus.textContent =
+                "Paused";
+
+            }
+
+
+            if (
+              event.data ===
+              YT.PlayerState.ENDED
+            ) {
+
+              playBtn.textContent =
+                "▶";
+
+              playNextSong();
+            }
+
+          },
+
+          onError: () => {
+
+            playerStatus.textContent =
+              "Unable to play this video.";
+
+          }
+
+        }
+
+      }
+    );
+};
+
+
+/* =========================================================
+   AUTO NEXT
+   ========================================================= */
+
+function playNextSong() {
+
+  if (!currentSongs.length) {
+    return;
+  }
+
+  let next =
+    currentIndex + 1;
+
+  if (
+    next >= currentSongs.length
+  ) {
+    next = 0;
+  }
+
+  playSong(next);
+}
+
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
+
+function toggleFavorite(id) {
+
+  if (favorites.includes(id)) {
+
+    favorites =
+      favorites.filter(
+        favoriteId =>
+          favoriteId !== id
+      );
+
+  } else {
+
+    favorites.push(id);
+  }
+
+
+  localStorage.setItem(
+    "moodifyFavorites",
+    JSON.stringify(favorites)
+  );
+
+
+  updatePlayerFavorite();
+
+  renderFavorites();
+}
+
+
+/* =========================================================
+   PLAYER FAVORITE
+   ========================================================= */
+
+if (playerFavoriteBtn) {
+
+  playerFavoriteBtn.addEventListener(
+    "click",
+    () => {
+
+      if (currentIndex === -1) {
+        return;
+      }
+
+      const song =
+        currentSongs[currentIndex];
+
+      toggleFavorite(song.id);
+    }
+  );
+}
 
 
 function updatePlayerFavorite() {
 
-    if (!currentSong) {
+  if (
+    !playerFavoriteBtn ||
+    currentIndex === -1
+  ) {
+    return;
+  }
 
-        playerFavoriteBtn.textContent =
-            "♡";
+  const song =
+    currentSongs[currentIndex];
 
-        return;
+  const active =
+    favorites.includes(song.id);
 
-    }
+
+  playerFavoriteBtn.textContent =
+    active ? "♥" : "♡";
 
 
-    if (isFavorite(currentSong)) {
-
-        playerFavoriteBtn.textContent =
-            "♥";
-
-        playerFavoriteBtn.classList.add(
-            "active"
-        );
-
-    } else {
-
-        playerFavoriteBtn.textContent =
-            "♡";
-
-        playerFavoriteBtn.classList.remove(
-            "active"
-        );
-
-    }
-
+  playerFavoriteBtn.classList.toggle(
+    "active",
+    active
+  );
 }
 
 
-/* ---------------------------------------------------------
-   FAVORITES LIST
---------------------------------------------------------- */
+/* =========================================================
+   FAVORITES DISPLAY
+   ========================================================= */
 
 function renderFavorites() {
 
-    const favorites =
-        getFavorites();
+  if (!favoritesContainer) {
+    return;
+  }
 
 
-    favoritesContainer.innerHTML = "";
+  const favoriteSongs =
+    musicDatabase.filter(
+      song =>
+        favorites.includes(song.id)
+    );
 
 
-    if (!favorites.length) {
+  if (!favoriteSongs.length) {
 
-        favoritesContainer.innerHTML = `
+    favoritesContainer.innerHTML = `
 
-            <div class="empty-favorites">
+      <div class="empty-favorites">
 
-                ❤️
+        <div>♡</div>
 
-                <p>
-                    No favorites yet
-                </p>
+        <p>
+          Your favorite songs will appear here.
+        </p>
 
-            </div>
+      </div>
 
-        `;
+    `;
 
-        return;
-
-    }
-
-
-    favorites.forEach(song => {
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "song-card";
+    return;
+  }
 
 
-        card.innerHTML = `
-
-            <div class="song-icon">
-                ❤️
-            </div>
-
-            <div class="song-details">
-
-                <h3>
-                    ${escapeHTML(song.title)}
-                </h3>
-
-                <p>
-                    ${song.language} • ${song.mood}
-                </p>
-
-            </div>
-
-        `;
+  favoritesContainer.innerHTML = "";
 
 
-        card.addEventListener(
-            "click",
-            () => {
+  favoriteSongs.forEach(song => {
 
-                const index =
-                    currentSongs.findIndex(
-                        item =>
-                            item.title ===
-                            song.title &&
-                            item.language ===
-                            song.language
-                    );
+    const item =
+      document.createElement("div");
+
+    item.className = "song-card";
 
 
-                if (index >= 0) {
+    item.innerHTML = `
 
-                    playSong(index);
+      <div class="song-number">
+        FAVORITE
+      </div>
 
-                } else {
+      <h3>
+        ${escapeHTML(song.title)}
+      </h3>
 
-                    selectedLanguage =
-                        song.language;
+      <p>
+        ${escapeHTML(song.artist)}
+      </p>
 
-                    selectedMood =
-                        song.mood;
+      <span class="song-language">
+        ${languageEmoji(song.language)}
+        ${song.language}
+      </span>
 
+      <button
+        class="favorite-btn active">
+        ♥
+      </button>
 
-                    syncButtons();
-
-                    renderSongs();
-
-
-                    const newIndex =
-                        currentSongs.findIndex(
-                            item =>
-                                item.title ===
-                                song.title
-                        );
-
-
-                    if (newIndex >= 0) {
-
-                        playSong(newIndex);
-
-                    }
-
-                }
-
-            }
-        );
+    `;
 
 
-        favoritesContainer.appendChild(
-            card
-        );
-
-    });
-
-}
-
-
-/* ---------------------------------------------------------
-   THEME
---------------------------------------------------------- */
-
-themeBtn.addEventListener(
-    "click",
-    () => {
-
-        document.body.classList.toggle(
-            "light"
-        );
-
+    item.addEventListener(
+      "click",
+      event => {
 
         if (
-            document.body.classList.contains(
-                "light"
-            )
+          event.target.closest(".favorite-btn")
         ) {
+          return;
+        }
 
-            themeBtn.textContent =
-                "☀️";
 
-            localStorage.setItem(
-                "moodifyTheme",
-                "light"
-            );
+        const index =
+          currentSongs.findIndex(
+            current =>
+              current.id === song.id
+          );
+
+
+        if (index !== -1) {
+
+          playSong(index);
 
         } else {
 
-            themeBtn.textContent =
-                "🌙";
+          currentSongs =
+            [song];
 
-            localStorage.setItem(
-                "moodifyTheme",
-                "dark"
-            );
-
+          playSong(0);
         }
 
-    }
-);
-
-
-/* ---------------------------------------------------------
-   LOAD THEME
---------------------------------------------------------- */
-
-function loadTheme() {
-
-    const theme =
-        localStorage.getItem(
-            "moodifyTheme"
-        );
-
-
-    if (theme === "light") {
-
-        document.body.classList.add(
-            "light"
-        );
-
-        themeBtn.textContent =
-            "☀️";
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   SYNC BUTTONS
---------------------------------------------------------- */
-
-function syncButtons() {
-
-    languageButtons.forEach(
-        button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.language ===
-                selectedLanguage
-            );
-
-        }
+      }
     );
 
 
-    moodButtons.forEach(
-        button => {
+    item
+      .querySelector(".favorite-btn")
+      .addEventListener(
+        "click",
+        event => {
 
-            button.classList.toggle(
-                "active",
-                button.dataset.mood ===
-                selectedMood
-            );
+          event.stopPropagation();
 
+          toggleFavorite(song.id);
+
+          renderFavorites();
+
+          renderSongs();
         }
-    );
+      );
 
+
+    favoritesContainer.appendChild(item);
+
+  });
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
+   LANGUAGE EMOJIS
+   ========================================================= */
+
+function languageEmoji(language) {
+
+  const emojis = {
+
+    Kannada: "🇮🇳",
+    Hindi: "🇮🇳",
+    Tamil: "🇮🇳",
+    Telugu: "🇮🇳",
+    English: "🇬🇧"
+
+  };
+
+  return emojis[language] || "🎵";
+}
+
+
+/* =========================================================
    HTML SAFETY
---------------------------------------------------------- */
+   ========================================================= */
 
-function escapeHTML(text) {
+function escapeHTML(value) {
 
-    return String(text)
-
-        .replaceAll("&", "&amp;")
-
-        .replaceAll("<", "&lt;")
-
-        .replaceAll(">", "&gt;")
-
-        .replaceAll('"', "&quot;")
-
-        .replaceAll("'", "&#039;");
-
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 
-/* ---------------------------------------------------------
-   FIND MUSIC BUTTON
---------------------------------------------------------- */
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
 
-findMusicBtn.addEventListener(
-    "click",
-    () => {
-
-        renderSongs();
-
-
-        document
-            .getElementById(
-                "songsContainer"
-            )
-            .scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-    }
-);
-
-
-/* ---------------------------------------------------------
-   START
---------------------------------------------------------- */
-
-loadTheme();
-
-syncButtons();
+renderFavorites();
 
 renderSongs();
 
-renderFavorites();
+console.log(
+  `Moodify loaded: ${musicDatabase.length} songs`
+);
