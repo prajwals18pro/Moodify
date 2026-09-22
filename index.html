@@ -1,337 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme-color" content="#8b5cf6">
+  <title>Moodify 2.0</title>
+  <meta name="description" content="Moodify — discover music by language and mood.">
 
-    <title>Moodify 2.0</title>
-
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="app">
+  <!-- ================= HEADER ================= -->
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-icon">🎧</div>
+      <div>
+        <h1>Moodify</h1>
+        <p>Your mood. Your music.</p>
+      </div>
+    </div>
 
-    <!-- HEADER -->
-    <header class="header">
+    <button id="themeBtn" class="theme-btn" aria-label="Change theme">
+      🌙
+    </button>
+  </header>
 
-        <div class="logo-area">
-            <div class="logo-icon">🎧</div>
 
-            <div>
-                <h1>Moodify</h1>
-                <p>Your mood. Your music.</p>
-            </div>
-        </div>
+  <!-- ================= HERO ================= -->
+  <main>
 
-        <button id="themeBtn" class="theme-btn">
-            🌙
+    <section class="hero">
+      <span class="hero-badge">🎵 MOODIFY 2.0</span>
+
+      <h2>Find music that<br><span>feels like you.</span></h2>
+
+      <p>
+        Choose your language and mood.
+        Let Moodify find your perfect soundtrack.
+      </p>
+    </section>
+
+
+    <!-- ================= LANGUAGE ================= -->
+    <section class="selection-section">
+
+      <div class="section-title">
+        <span>🌍</span>
+        <h3>Choose Language</h3>
+      </div>
+
+      <div class="language-grid">
+
+        <button class="language-btn active" data-language="Kannada">
+          <span>🇮🇳</span>
+          <strong>Kannada</strong>
+          <small>200 songs</small>
         </button>
 
-    </header>
+        <button class="language-btn" data-language="Hindi">
+          <span>🇮🇳</span>
+          <strong>Hindi</strong>
+          <small>50 songs</small>
+        </button>
+
+        <button class="language-btn" data-language="Tamil">
+          <span>🇮🇳</span>
+          <strong>Tamil</strong>
+          <small>50 songs</small>
+        </button>
+
+        <button class="language-btn" data-language="Telugu">
+          <span>🇮🇳</span>
+          <strong>Telugu</strong>
+          <small>50 songs</small>
+        </button>
+
+        <button class="language-btn" data-language="English">
+          <span>🇬🇧</span>
+          <strong>English</strong>
+          <small>30 songs</small>
+        </button>
+
+      </div>
+    </section>
 
 
-    <!-- LANGUAGE -->
+    <!-- ================= MOOD ================= -->
     <section class="selection-section">
 
-        <div class="section-heading">
-            <span>🌍</span>
-            <div>
-                <h2>Choose Language</h2>
-                <p>Find music in your language</p>
-            </div>
-        </div>
+      <div class="section-title">
+        <span>✨</span>
+        <h3>What's your mood?</h3>
+      </div>
 
-        <div class="language-grid">
+      <div class="mood-grid">
 
-            <button class="language-btn active"
-                    data-language="Kannada">
-                ಕನ್ನಡ
-            </button>
+        <button class="mood-btn active" data-mood="Happy">
+          😊
+          <span>Happy</span>
+        </button>
 
-            <button class="language-btn"
-                    data-language="Hindi">
-                हिंदी
-            </button>
+        <button class="mood-btn" data-mood="Sad">
+          😢
+          <span>Sad</span>
+        </button>
 
-            <button class="language-btn"
-                    data-language="Tamil">
-                தமிழ்
-            </button>
+        <button class="mood-btn" data-mood="Romantic">
+          ❤️
+          <span>Romantic</span>
+        </button>
 
-            <button class="language-btn"
-                    data-language="Telugu">
-                తెలుగు
-            </button>
+        <button class="mood-btn" data-mood="Energetic">
+          ⚡
+          <span>Energetic</span>
+        </button>
 
-            <button class="language-btn"
-                    data-language="English">
-                English
-            </button>
+        <button class="mood-btn" data-mood="Calm">
+          🌿
+          <span>Calm</span>
+        </button>
 
-        </div>
+        <button class="mood-btn" data-mood="Motivational">
+          🔥
+          <span>Motivational</span>
+        </button>
+
+        <button class="mood-btn" data-mood="Chill">
+          🌙
+          <span>Chill</span>
+        </button>
+
+      </div>
+    </section>
+
+
+    <!-- ================= FIND BUTTON ================= -->
+    <section class="find-section">
+
+      <button id="findMusicBtn" class="find-btn">
+        <span>🎶</span>
+        FIND MY MUSIC
+        <span>→</span>
+      </button>
 
     </section>
 
 
-    <!-- MOOD -->
-    <section class="selection-section">
+    <!-- ================= RESULTS ================= -->
+    <section id="resultsSection" class="results-section">
 
-        <div class="section-heading">
-            <span>💭</span>
-
-            <div>
-                <h2>Choose Your Mood</h2>
-                <p>Let your mood choose the music</p>
-            </div>
-        </div>
-
-
-        <div class="mood-grid">
-
-            <button class="mood-btn active"
-                    data-mood="Happy">
-                😊 Happy
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Sad">
-                😔 Sad
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Romantic">
-                ❤️ Romantic
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Energetic">
-                ⚡ Energetic
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Calm">
-                🌿 Calm
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Motivational">
-                🔥 Motivational
-            </button>
-
-            <button class="mood-btn"
-                    data-mood="Chill">
-                😎 Chill
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- FIND MUSIC -->
-    <button id="findMusicBtn" class="find-btn">
-        🎧 FIND MY MUSIC
-    </button>
-
-
-    <!-- RESULTS -->
-    <section class="result-header">
+      <div class="results-header">
 
         <div>
+          <span class="results-label">YOUR SOUNDTRACK</span>
 
-            <p class="small-title">
-                YOUR PERSONAL PLAYLIST
+          <h2 id="resultsTitle">
+            Kannada • Happy
+          </h2>
+
+          <p id="resultsCount">
+            Discover your songs
+          </p>
+        </div>
+
+        <div class="music-equalizer" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+      </div>
+
+
+      <!-- SONG CARDS -->
+      <div id="songContainer" class="song-container"></div>
+
+    </section>
+
+
+    <!-- ================= PLAYER ================= -->
+    <section id="playerSection" class="player-section">
+
+      <div class="player-heading">
+        <span>🎧</span>
+        <strong>MOODIFY PLAYER</strong>
+      </div>
+
+      <div class="player-card">
+
+        <!-- YouTube player -->
+        <div class="youtube-wrapper">
+          <div id="youtubePlayer"></div>
+
+          <div id="playerPlaceholder" class="player-placeholder">
+            <div class="placeholder-icon">🎵</div>
+            <h3>Nothing Playing</h3>
+            <p>Tap a song to start listening</p>
+          </div>
+        </div>
+
+
+        <!-- Now playing information -->
+        <div class="now-playing">
+
+          <div class="now-playing-info">
+
+            <span class="now-playing-label">
+              NOW PLAYING
+            </span>
+
+            <h3 id="playerSongTitle">
+              Select a song
+            </h3>
+
+            <p id="playerSongArtist">
+              Moodify • Your music
             </p>
 
-            <h2 id="resultTitle">
-                Kannada • Happy
-            </h2>
+          </div>
 
-        </div>
-
-        <div class="song-count">
-
-            <span id="songCount">
-                0
-            </span>
-
-            <small>
-                Songs
-            </small>
-
-        </div>
-
-    </section>
-
-
-    <!-- SONG LIST -->
-    <main id="songsContainer"
-          class="songs-container">
-    </main>
-
-
-    <!-- PLAYER -->
-    <section id="musicPlayer"
-             class="music-player">
-
-        <div class="player-video">
-
-            <div id="youtubePlayer">
-
-                <div class="player-placeholder">
-
-                    <div class="big-music-icon">
-                        🎵
-                    </div>
-
-                    <h3>
-                        Nothing Playing
-                    </h3>
-
-                    <p>
-                        Tap a song to start listening
-                    </p>
-
-                </div>
-
-            </div>
+          <button
+            id="playerFavoriteBtn"
+            class="player-heart"
+            aria-label="Add to favorites">
+            ♡
+          </button>
 
         </div>
 
 
-        <div class="player-info">
-
-            <div class="now-playing-label">
-                NOW PLAYING
-            </div>
-
-
-            <div class="player-song-row">
-
-                <div class="player-cover">
-                    🎵
-                </div>
-
-
-                <div class="player-song-details">
-
-                    <h3 id="playerSongTitle">
-                        Select a song
-                    </h3>
-
-                    <p id="playerSongArtist">
-                        Moodify • Your music
-                    </p>
-
-                </div>
-
-
-                <button id="playerFavoriteBtn"
-                        class="player-heart">
-                    ♡
-                </button>
-
-            </div>
-
-        </div>
-
-
+        <!-- Player controls -->
         <div class="player-controls">
 
-            <button id="previousBtn"
-                    class="control-btn">
-                ⏮
-            </button>
+          <button
+            id="prevBtn"
+            class="control-btn"
+            aria-label="Previous song">
+            ⏮
+          </button>
 
+          <button
+            id="playBtn"
+            class="play-btn"
+            aria-label="Play or pause">
+            ▶
+          </button>
 
-            <button id="playPauseBtn"
-                    class="play-btn">
-                ▶
-            </button>
-
-
-            <button id="nextBtn"
-                    class="control-btn">
-                ⏭
-            </button>
-
-        </div>
-
-
-        <div class="player-status">
-
-            <span id="playerStatus">
-                Ready to play
-            </span>
+          <button
+            id="nextBtn"
+            class="control-btn"
+            aria-label="Next song">
+            ⏭
+          </button>
 
         </div>
 
+        <div id="playerStatus" class="player-status">
+          Choose a song to begin
+        </div>
+
+      </div>
     </section>
 
 
-    <!-- FAVORITES -->
+    <!-- ================= FAVORITES ================= -->
     <section class="favorites-section">
 
-        <div class="section-heading">
+      <div class="section-title">
+        <span>❤️</span>
+        <h3>Your Favorites</h3>
+      </div>
 
-            <span>❤️</span>
+      <div id="favoritesContainer" class="favorites-container">
 
-            <div>
-                <h2>Your Favorites</h2>
-
-                <p>
-                    Songs you love
-                </p>
-            </div>
-
+        <div class="empty-favorites">
+          <div>♡</div>
+          <p>Your favorite songs will appear here.</p>
         </div>
 
-
-        <div id="favoritesContainer"
-             class="favorites-container">
-
-            <div class="empty-favorites">
-                ❤️
-                <p>
-                    No favorites yet
-                </p>
-            </div>
-
-        </div>
+      </div>
 
     </section>
 
-
-    <!-- FOOTER -->
-    <footer>
-
-        <div class="footer-logo">
-            🎧 Moodify 2.0
-        </div>
-
-        <p>
-            Music that matches your mood.
-        </p>
-
-        <span>
-            Made with ❤️ for music lovers
-        </span>
-
-    </footer>
-
-</div>
+  </main>
 
 
-<!-- YOUTUBE API -->
-<script src="https://www.youtube.com/iframe_api"></script>
+  <!-- ================= FOOTER ================= -->
+  <footer>
 
-<!-- MOODIFY SCRIPT -->
-<script src="script.js"></script>
+    <div class="footer-brand">
+      🎧 <strong>Moodify</strong>
+    </div>
+
+    <p>
+      Made with ❤️ for music lovers.
+    </p>
+
+    <p class="footer-small">
+      Moodify 2.0 • 380 songs • 5 languages • 7 moods
+    </p>
+
+  </footer>
+
+
+  <!-- ================= SCRIPTS ================= -->
+
+  <!-- YouTube IFrame Player API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Moodify -->
+  <script src="script.js"></script>
 
 </body>
 </html>
