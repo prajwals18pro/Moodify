@@ -786,7 +786,6 @@ function renderSongs() {
 /* =========================================================
    PLAY SONG
    ========================================================= */
-
 function playSong(index) {
 
   if (
@@ -801,63 +800,20 @@ function playSong(index) {
   const song =
     currentSongs[currentIndex];
 
-
-  playerSongTitle.textContent =
-    song.title;
-
-  playerSongArtist.textContent =
-    `${song.artist} • ${song.language}`;
-
-
-  updatePlayerFavorite();
-
-
-  if (!song.videoId) {
-
-    playerPlaceholder.style.display =
-      "flex";
-
-    playerStatus.textContent =
-      "🎵 Song selected • verified playback ID pending";
-
-    playBtn.textContent = "▶";
-
-    playerSection.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-    return;
-  }
-
-
-  playerPlaceholder.style.display =
-    "none";
-
-
-  if (youtubeReady && ytPlayer) {
-
-    ytPlayer.loadVideoById(
-      song.videoId
+  const query =
+    encodeURIComponent(
+      `${song.title} ${song.artist} ${song.language} official song`
     );
 
-    playBtn.textContent = "⏸";
+  const youtubeURL =
+    `https://www.youtube.com/results?search_query=${query}`;
 
-    playerStatus.textContent =
-      "▶ Playing";
-
-  } else {
-
-    playerStatus.textContent =
-      "Loading player…";
-  }
-
-
-  playerSection.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
+  window.open(
+    youtubeURL,
+    "_blank"
+  );
 }
+
 
 
 /* =========================================================
